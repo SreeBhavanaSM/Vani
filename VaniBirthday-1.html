@@ -1,0 +1,2290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy 25th Birthday, Vani</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #070a1f; }
+  #root { height: 100vh; min-height: 640px; width: 100%; }
+*{box-sizing:border-box;}
+body{margin:0;padding:0;}
+button{background:none;border:none;font:inherit;color:inherit;cursor:pointer;padding:0;}
+.absolute{position:absolute;}
+.fixed{position:fixed;}
+.relative{position:relative;}
+.inset-0{top:0;right:0;bottom:0;left:0;}
+.top-5{top:1.25rem;}
+.bottom-0{bottom:0;}
+.bottom-7{bottom:1.75rem;}
+.bottom-10{bottom:2.5rem;}
+.left-0{left:0;}
+.left-1\/2{left:50%;}
+.right-0{right:0;}
+.z-10{z-index:10;}
+.z-20{z-index:20;}
+.z-30{z-index:30;}
+.z-40{z-index:40;}
+.z-50{z-index:50;}
+.flex{display:flex;}
+.flex-col{flex-direction:column;}
+.grid{display:grid;}
+.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.items-center{align-items:center;}
+.justify-center{justify-content:center;}
+.justify-between{justify-content:space-between;}
+.gap-2{gap:0.5rem;}
+.gap-3{gap:0.75rem;}
+.gap-4{gap:1rem;}
+.gap-6{gap:1.5rem;}
+.w-full{width:100%;}
+.h-full{height:100%;}
+.max-w-xl{max-width:36rem;}
+.p-6{padding:1.5rem;}
+.px-1{padding-left:0.25rem;padding-right:0.25rem;}
+.px-6{padding-left:1.5rem;padding-right:1.5rem;}
+.px-7{padding-left:1.75rem;padding-right:1.75rem;}
+.px-8{padding-left:2rem;padding-right:2rem;}
+.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem;}
+.py-3{padding-top:0.75rem;padding-bottom:0.75rem;}
+.py-8{padding-top:2rem;padding-bottom:2rem;}
+.pb-8{padding-bottom:2rem;}
+.pt-14{padding-top:3.5rem;}
+.mt-2{margin-top:0.5rem;}
+.mt-4{margin-top:1rem;}
+.mt-5{margin-top:1.25rem;}
+.mt-6{margin-top:1.5rem;}
+.mt-8{margin-top:2rem;}
+.mt-9{margin-top:2.25rem;}
+.mt-10{margin-top:2.5rem;}
+.mb-5{margin-bottom:1.25rem;}
+.mb-6{margin-bottom:1.5rem;}
+.rounded-full{border-radius:9999px;}
+.overflow-hidden{overflow:hidden;}
+.pointer-events-none{pointer-events:none;}
+.text-center{text-align:center;}
+.text-sm{font-size:0.875rem;line-height:1.25rem;}
+.text-xs{font-size:0.75rem;line-height:1rem;}
+.text-amber-100{color:#fde8c9;}
+.text-amber-50{color:#fffbeb;}
+.tracking-wide{letter-spacing:0.025em;}
+.tracking-widest{letter-spacing:0.1em;}
+.uppercase{text-transform:uppercase;}
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef, useCallback } = React;
+
+/* ---------------- inline icons (no lucide-react dependency needed) ---------------- */
+function Heart({ size = 16, color = "currentColor", fill = "none" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  );
+}
+function Sparkles({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
+      <path d="M12 2l1.8 5.4L19 9l-5.2 1.6L12 16l-1.8-5.4L5 9l5.2-1.6L12 2z" />
+      <path d="M19 14l0.9 2.6L22 17.5l-2.1 0.9L19 21l-0.9-2.6L16 17.5l2.1-0.9L19 14z" />
+    </svg>
+  );
+}
+function ChevronLeft({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m15 18-6-6 6-6" />
+    </svg>
+  );
+}
+function ChevronRight({ size = 16, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+function Menu({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
+function XIcon({ size = 20, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 6 6 18M6 6l12 12" />
+    </svg>
+  );
+}
+function Volume2({ size = 18, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5Z" />
+      <path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12" />
+    </svg>
+  );
+}
+function VolumeX({ size = 18, color = "currentColor" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5Z" />
+      <path d="m22 9-6 6M16 9l6 6" />
+    </svg>
+  );
+}
+
+/* ============================================================
+   VANI'S 25TH BIRTHDAY — VERSION 1
+   Scenes included in this build:
+   1. Opening night sky (moon easter egg, intro lines)
+   2. Birthday cake — 11 interactive blessing candles, countdown,
+      blow-out, confetti / fireworks / balloons
+   3. Gift cinematic (teddy dialogue, ribbon + box)
+   4. Title reveal — "OUR JOURNEY"
+   5. Scrapbook opening letter (teaser for the next chapters)
+
+   Not yet built (needs real photos / friend names / letters):
+   About Her, Friendship Wall, Travel Map, Letters, Bucket List,
+   Final Cinematic. Swap in real content in the DATA block below
+   whenever it's ready — code is written to make that easy.
+   ============================================================ */
+
+const HER_NAME = "Vani";
+
+/* ---------------- audio (tiny synth, no files needed) ---------------- */
+let _ctx = null;
+function getCtx() {
+  if (!_ctx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    _ctx = new AC();
+  }
+  if (_ctx.state === "suspended") _ctx.resume();
+  return _ctx;
+}
+function chime(freq = 880) {
+  try {
+    const ctx = getCtx();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "sine";
+    o.frequency.value = freq;
+    o.connect(g);
+    g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.0001, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.18, ctx.currentTime + 0.03);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.1);
+    o.start();
+    o.stop(ctx.currentTime + 1.1);
+  } catch (e) {}
+}
+function shutterClick() {
+  try {
+    const ctx = getCtx();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "square";
+    o.frequency.setValueAtTime(1200, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.06);
+    o.connect(g);
+    g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.12, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.08);
+    o.start();
+    o.stop(ctx.currentTime + 0.09);
+  } catch (e) {}
+}
+function whoosh() {
+  try {
+    const ctx = getCtx();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "sawtooth";
+    o.frequency.setValueAtTime(600, ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.9);
+    o.connect(g);
+    g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.1, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.9);
+    o.start();
+    o.stop(ctx.currentTime + 0.9);
+  } catch (e) {}
+}
+
+/* ---------------- gentle background melody (procedural, no audio file needed) ---------------- */
+let _melodyOn = false;
+let _melodyTimer = null;
+// A soft, slow music-box style phrase — plays low in the background on loop.
+const MELODY_PHRASE = [
+  { f: 523.25, d: 0.9 }, { f: 659.25, d: 0.9 }, { f: 783.99, d: 0.9 }, { f: 659.25, d: 0.9 },
+  { f: 587.33, d: 0.9 }, { f: 783.99, d: 0.9 }, { f: 987.77, d: 1.6 }, { f: 0, d: 0.9 },
+  { f: 493.88, d: 0.9 }, { f: 587.33, d: 0.9 }, { f: 659.25, d: 0.9 }, { f: 587.33, d: 1.6 }, { f: 0, d: 1.0 },
+];
+function playMelodyNote(freq, dur, delay) {
+  if (!freq) return;
+  try {
+    const ctx = getCtx();
+    const t0 = ctx.currentTime + delay;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = "triangle";
+    o.frequency.value = freq;
+    o.connect(g);
+    g.connect(ctx.destination);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(0.045, t0 + 0.15);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.start(t0);
+    o.stop(t0 + dur + 0.05);
+  } catch (e) {}
+}
+function scheduleMelodyLoop() {
+  if (!_melodyOn) return;
+  let t = 0;
+  MELODY_PHRASE.forEach((n) => {
+    playMelodyNote(n.f, n.d * 0.95, t);
+    t += n.d;
+  });
+  _melodyTimer = setTimeout(scheduleMelodyLoop, t * 1000 + 600);
+}
+function startMelody() {
+  if (_melodyOn) return;
+  _melodyOn = true;
+  scheduleMelodyLoop();
+}
+function stopMelody() {
+  _melodyOn = false;
+  if (_melodyTimer) clearTimeout(_melodyTimer);
+}
+
+/* ---------------- data ---------------- */
+const INTRO_LINES = [
+  "Somewhere past the clouds, past the altitude charts and the atmosphere...",
+  "there's a whole galaxy that already feels like yours.",
+  "Today isn't about the passing of another year...",
+  "It's about celebrating someone whose heart is as vast as the sky someone who never stops dreaming, exploring, and inspiring.",
+  "Twenty-five years of laughter, kindness, dreams, and adventures...",
+  `Happy 25th Birthday, ${HER_NAME}.`,
+];
+
+const BLESSINGS = [
+  { title: "Health", text: "May your heart stay happy and your body stay strong.", color: "#FF8A65" },
+  { title: "Happiness", text: "May every day give you another reason to smile.", color: "#FFD54F" },
+  { title: "Courage", text: "May you always be brave enough to chase your dreams.", color: "#E57373" },
+  { title: "Love", text: "May you always be surrounded by people who truly love and value you.", color: "#F48FB1" },
+  { title: "Success", text: "May every step you take bring you closer to the life you dream of.", color: "#FFB74D" },
+  { title: "Adventure", text: "May your passport fill with stamps and your heart with unforgettable memories.", color: "#4FC3F7" },
+  { title: "Peace", text: "May you find calm even during life's busiest moments.", color: "#81C784" },
+  { title: "Laughter", text: "May your laughter continue to brighten every room you walk into.", color: "#FFF176" },
+  { title: "Friendship", text: "May the people who stand beside you today remain beside you for many years to come.", color: "#BA68C8" },
+  { title: "New Beginnings", text: "May twenty-five be the start of your most beautiful chapter yet.", color: "#4DB6AC" },
+];
+const WISH_COLOR = "#F5C56B";
+
+const GIFT_LINES = [
+  "This isn't just a gift...",
+  "It's every laugh...",
+  "Every adventure...",
+  "Every unforgettable memory...",
+  "Wrapped together.",
+];
+
+const LETTER_LINES = [
+  `Dear ${HER_NAME},`,
+  "Back in PU, you were the one who taught me every subject that mattered...",
+  "Physics, chemistry, math — even the ones I never admit I struggled with.",
+  "You never just gave me the answer. You made sure I actually understood it.",
+  "Years later, that hasn't changed one bit.",
+  "You're still the person whose advice I trust the most.",
+  "So here's my birthday ask, Ma'am:",
+  "Keep guiding me. Keep telling me when I'm right...",
+  "And when I'm not — tell me straight, the way you always have.",
+  "That honesty is one of the best gifts you've ever given me.",
+  "Sometimes I think how did we even end up here",
+  "actually I fell happy... for all those little movements.. which brought us closer day by day",
+  "happy to say ur my bessssst friend",
+  "and happy that u'll always be with me",
+  "no matter what the situation is, it's just another story with you which I can rember for the rest of my life",
+  "I wish",
+  "we tell our story togaether to our kids.....",
+  "and to see a little jelousy and envy on their face kash!!! I had a freiend like my mom and her friend",
+  "and our stoy continue to be a.........",
+  "",
+  "happiely ever after one................"
+];
+
+// PHOTOS: used for the two small "stamp" photos on the love letter. Replace `src` with real photos.
+const PHOTOS = [
+  { src: "assets/1.jpg", caption: "Add a memory here ✈️", tilt: -6 },
+  { src: "assets/2.jpg", caption: "Add a memory here 🌙", tilt: 4 },
+];
+// FLIPBOOK_SONG: add your own legally-obtained mp3 to assets (e.g. assets/audio/song.mp3) and point this at it.
+// Leave the file missing and it just stays silent — no error, no crash.
+const FLIPBOOK_SONG = "assets/audio/raktha-sambandhagala.mp3";
+
+const YOUR_NAME = "Bhavana";
+
+const LOVE_LETTER_LINES = [
+  `My dear babe, ${HER_NAME},`,
+  "I still remember the day you offered me a seat beside you to read...",
+  "I think I would have missed knowing a truly beautiful person, if I'd said no.",
+  "I never imagined that one small 'yes' would lead here.",
+  "Never thinking you would become the best part of my life.",
+  "here we are. today after all these years with all these memories",
+];
+
+// MEMORY_PAGES: the full-page flipbook. Each page fills the whole screen.
+// type: "image" or "video" · src: replace with the real file/URL · accent: background color behind it
+const MEMORY_PAGES = [
+  { type: "image", src: "assets/1.jpg", caption: "Dear Vani", accent: "#6b1220" },
+  { type: "image", src: "assets/2.jpg", caption: "our first prize 🌙", accent: "#1F3B2C" },
+  { type: "image", src: "assets/3.jpg", caption: "We were not supposed to be out actually🎥", accent: "#101418" },
+  { type: "image", src: "assets/4.jpg", caption: "yummyyyyyyyy 🚀", accent: "#3B1F3A" },
+  { type: "image", src: "assets/5.jpg", caption: "it's my birtday today 🪐", accent: "#1a2550" },
+  { type: "image", src: "assets/6.jpg", caption: "our first trip 💛", accent: "#6b1220" },
+  { type: "image", src: "assets/7.jpg", caption: "movie time ✨", accent: "#1F3B2C" },
+  { type: "image", src: "assets/8.jpg", caption: "I guess they were busy explaing us than watching the film 🌙", accent: "#101418" },
+  { type: "image", src: "assets/9.jpg", caption: "temple run", accent: "#3B1F3A" },
+  { type: "image", src: "assets/10.jpg", caption: "no words🪐", accent: "#1a2550" },
+  { type: "image", src: "assets/11.jpg", caption: "💛", accent: "#6b1220" },
+  { type: "image", src: "assets/12.jpg", caption: "clumsy yet funny🚀", accent: "#1F3B2C" },
+  { type: "image", src: "assets/13.jpg", caption: "✨", accent: "#101418" },
+  { type: "image", src: "assets/14.jpg", caption: "just pure blis🌙", accent: "#3B1F3A" },
+  { type: "image", src: "assets/15.jpg", caption: "I forgot the cake count", accent: "#1a2550" },
+  { type: "image", src: "assets/16.jpg", caption: "what were we even doing 💛", accent: "#6b1220" },
+  { type: "image", src: "assets/17.jpg", caption: "awwwwwww 🪐", accent: "#1F3B2C" },
+  // 18-30 — just drop the matching numbered photos into assets/pic and these light up automatically
+  { type: "image", src: "assets/18.jpg", caption: "just for fun ✨", accent: "#101418" },
+  { type: "image", src: "assets/19.jpg", caption: "our little princess 🌙", accent: "#3B1F3A" },
+  { type: "image", src: "assets/20.jpg", caption: "barbie doll", accent: "#1a2550" },
+  { type: "image", src: "assets/21.jpg", caption: "", accent: "#6b1220" },
+  { type: "image", src: "assets/22.jpg", caption: "🪐", accent: "#1F3B2C" },
+  { type: "image", src: "assets/23.jpg", caption: "happiness overloaded✨", accent: "#101418" },
+  { type: "image", src: "assets/24.jpg", caption: "never forgeting this", accent: "#3B1F3A" },
+  { type: "image", src: "assets/25.jpg", caption: "fooddie me🌙", accent: "#1a2550" },
+  { type: "image", src: "assets/26.jpg", caption: "dandia nights...💛", accent: "#6b1220" },
+  { type: "image", src: "assets/27.jpg", caption: "", accent: "#1F3B2C" },
+  { type: "image", src: "assets/28.jpg", caption: "nooooooooooo 🪐", accent: "#101418" },
+  { type: "image", src: "assets/29.jpg", caption: "✨", accent: "#3B1F3A" },
+  { type: "image", src: "assets/30.jpg", caption: "happiely ever after....💛", accent: "#1a2550" },
+];
+const FUN_FACTS = [
+  { front: "🛩️", back: "She designs aircraft for a living. Most people just hope the plane doesn't shake — she's the reason it doesn't." },
+  { front: "🌌", back: "She loves space so much, the sky basically owes her royalties." },
+  { front: "📐", back: "Give her a blank sheet and a problem, and somehow both come back solved and better looking." },
+  { front: "😆", back: "Certified expert at making people laugh mid-lecture without even trying." },
+  { front: "🧭", back: "Has never once given bad advice. It's honestly a little annoying how right she always is." },
+  { front: "🎂", back: "Officially proof that the best engineers are built, not born — happy birthday to the blueprint herself." },
+];
+
+// The "launch code" for the birthday puzzle — her birthday, July 9th.
+const LAUNCH_MONTH = 7;
+const LAUNCH_DAY = 9;
+
+/* ---------------- small shared pieces ---------------- */
+function Stars({ count = 90 }) {
+  const stars = useRef(
+    Array.from({ length: count }, () => ({
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      size: Math.random() * 2 + 1,
+      delay: Math.random() * 5,
+      dur: Math.random() * 3 + 2,
+    }))
+  ).current;
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {stars.map((s, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            top: `${s.top}%`,
+            left: `${s.left}%`,
+            width: s.size,
+            height: s.size,
+            borderRadius: "50%",
+            background: "#FFF9E8",
+            opacity: 0.7,
+            animation: `twinkle ${s.dur}s ease-in-out ${s.delay}s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+let _starUid = 0;
+function makeStar(x, y, size) {
+  _starUid += 1;
+  return { id: _starUid, x, y, size: size ?? Math.random() * 2 + 1.4 };
+}
+
+// A starfield you can tap. Every tap splits that star into two, drifting apart —
+// the "magical entry" touch effect.
+function InteractiveStars({ count = 26 }) {
+  const [stars, setStars] = useState(() =>
+    Array.from({ length: count }, () => makeStar(Math.random() * 100, Math.random() * 100))
+  );
+
+  const splitStar = useCallback((star) => {
+    chime(1100 + Math.random() * 400);
+    setStars((prev) => {
+      const rest = prev.filter((s) => s.id !== star.id);
+      const spread = 6 + Math.random() * 6;
+      const a = makeStar(
+        Math.min(97, Math.max(3, star.x - spread)),
+        Math.min(97, Math.max(3, star.y - spread * 0.6)),
+        Math.min(star.size + 0.8, 4)
+      );
+      const b = makeStar(
+        Math.min(97, Math.max(3, star.x + spread)),
+        Math.min(97, Math.max(3, star.y + spread * 0.6)),
+        Math.min(star.size + 0.8, 4)
+      );
+      return prev.length > 160 ? [...rest, a, b].slice(-160) : [...rest, a, b];
+    });
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 5 }}>
+      {stars.map((s) => (
+        <button
+          key={s.id}
+          onClick={() => splitStar(s)}
+          aria-label="A star — tap it"
+          style={{
+            position: "absolute",
+            top: `${s.y}%`,
+            left: `${s.x}%`,
+            width: Math.max(22, s.size * 8),
+            height: Math.max(22, s.size * 8),
+            transform: "translate(-50%,-50%)",
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+          }}
+        >
+          <span
+            style={{
+              display: "block",
+              width: s.size * 3,
+              height: s.size * 3,
+              margin: "0 auto",
+              borderRadius: "50%",
+              background: "radial-gradient(circle, #FFFDF2 0%, #FFE9C2 55%, transparent 75%)",
+              boxShadow: `0 0 ${s.size * 4}px ${s.size}px rgba(255,233,194,0.7)`,
+              animation: "starPop 0.5s ease",
+            }}
+          />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// Occasional shooting stars streaking across the sky, purely ambient.
+function ShootingStars({ count = 3 }) {
+  const streaks = useRef(
+    Array.from({ length: count }, () => ({
+      top: 5 + Math.random() * 35,
+      left: Math.random() * 60,
+      delay: Math.random() * 8,
+      dur: 1.8 + Math.random() * 1.2,
+    }))
+  ).current;
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 4 }}>
+      {streaks.map((s, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            top: `${s.top}%`,
+            left: `${s.left}%`,
+            width: 2,
+            height: 2,
+            borderRadius: "50%",
+            background: "#fff",
+            boxShadow: "0 0 6px 2px rgba(255,255,255,0.8)",
+            animation: `shootingStar ${s.dur}s ease-in ${s.delay}s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Confetti({ show }) {
+  const pieces = useRef(
+    Array.from({ length: 70 }, () => ({
+      left: Math.random() * 100,
+      color: ["#F5C56B", "#F4A6A0", "#81C784", "#4FC3F7", "#BA68C8", "#FFF176"][Math.floor(Math.random() * 6)],
+      delay: Math.random() * 0.8,
+      dur: 2.6 + Math.random() * 1.6,
+      size: 6 + Math.random() * 6,
+      rot: Math.random() * 360,
+    }))
+  ).current;
+  if (!show) return null;
+  return (
+    <div className="fixed inset-0 pointer-events-none z-40 overflow-hidden">
+      {pieces.map((p, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            top: "-5%",
+            left: `${p.left}%`,
+            width: p.size,
+            height: p.size * 0.5,
+            background: p.color,
+            transform: `rotate(${p.rot}deg)`,
+            animation: `confettiFall ${p.dur}s linear ${p.delay}s forwards`,
+            borderRadius: 2,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Fireworks({ show }) {
+  const bursts = useRef(
+    Array.from({ length: 5 }, () => ({
+      top: 15 + Math.random() * 40,
+      left: 10 + Math.random() * 80,
+      delay: Math.random() * 1.4,
+      color: ["#F5C56B", "#F4A6A0", "#4FC3F7", "#BA68C8"][Math.floor(Math.random() * 4)],
+    }))
+  ).current;
+  if (!show) return null;
+  return (
+    <div className="fixed inset-0 pointer-events-none z-30 overflow-hidden">
+      {bursts.map((b, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            top: `${b.top}%`,
+            left: `${b.left}%`,
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            boxShadow: `0 0 0 0 ${b.color}`,
+            background: b.color,
+            animation: `fireworkBurst 1.6s ease-out ${b.delay}s forwards`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Balloons({ show }) {
+  const balloons = useRef(
+    Array.from({ length: 10 }, () => ({
+      left: Math.random() * 90,
+      color: ["#F4A6A0", "#F5C56B", "#4FC3F7", "#BA68C8", "#81C784"][Math.floor(Math.random() * 5)],
+      delay: Math.random() * 1.5,
+      dur: 6 + Math.random() * 3,
+    }))
+  ).current;
+  if (!show) return null;
+  return (
+    <div className="fixed inset-0 pointer-events-none z-20 overflow-hidden">
+      {balloons.map((b, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            bottom: "-15%",
+            left: `${b.left}%`,
+            animation: `balloonRise ${b.dur}s ease-in ${b.delay}s forwards`,
+          }}
+        >
+          <div style={{ width: 26, height: 34, borderRadius: "50% 50% 50% 50%/60% 60% 40% 40%", background: b.color, boxShadow: "inset -4px -4px 8px rgba(0,0,0,0.15)" }} />
+          <div style={{ width: 1, height: 40, background: "rgba(255,255,255,0.4)", margin: "0 auto" }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Teddy({ size = 64, bounce = true, style = {} }) {
+  return (
+    <div
+      style={{
+        fontSize: size,
+        lineHeight: 1,
+        animation: bounce ? "teddyBob 2.4s ease-in-out infinite" : "none",
+        filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.35))",
+        ...style,
+      }}
+    >
+      🧸
+    </div>
+  );
+}
+
+/* ================= OPENING SCENE ================= */
+function OpeningScene({ onSkip, onBegin }) {
+  const [moonClicked, setMoonClicked] = useState(false);
+  const [lineIdx, setLineIdx] = useState(0);
+  const isLast = lineIdx === INTRO_LINES.length - 1;
+
+  useEffect(() => {
+    if (isLast) return;
+    const t = setTimeout(() => setLineIdx((i) => i + 1), 5800);
+    return () => clearTimeout(t);
+  }, [lineIdx, isLast]);
+
+  return (
+    <div
+      className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden"
+      style={{ background: "radial-gradient(ellipse at 50% 20%, #16224a 0%, #060a1f 65%, #030510 100%)" }}
+    >
+      <Stars />
+      <InteractiveStars />
+      <ShootingStars />
+      {/* moon */}
+      <button
+        onClick={() => setMoonClicked(true)}
+        aria-label="A glowing moon"
+        className="absolute"
+        style={{
+          top: "9%",
+          right: "12%",
+          width: 70,
+          height: 70,
+          borderRadius: "50%",
+          background: "radial-gradient(circle at 35% 30%, #FFF6DA, #F5C56B 60%, #E0A94C 100%)",
+          boxShadow: moonClicked
+            ? "0 0 60px 18px rgba(245,197,107,0.55)"
+            : "0 0 28px 6px rgba(245,197,107,0.35)",
+          border: "none",
+          cursor: "pointer",
+          transition: "box-shadow 0.8s ease",
+        }}
+      />
+
+      <div className="relative z-10 px-8 text-center max-w-xl">
+        <p
+          key={lineIdx}
+          className="text-amber-50"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: isLast ? "1.9rem" : "1.35rem",
+            fontStyle: isLast ? "normal" : "italic",
+            fontWeight: isLast ? 700 : 400,
+            letterSpacing: 0.3,
+            animation: "fadeInSoft 1.4s ease",
+            lineHeight: 1.5,
+          }}
+        >
+          {INTRO_LINES[lineIdx]}
+        </p>
+
+        {!isLast && (
+          <p
+            className="mt-6 text-amber-100"
+            style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.72rem", letterSpacing: 1, opacity: 0.6, animation: "fadeInSoft 2s ease" }}
+          >
+            ✨ tap the stars around you ✨
+          </p>
+        )}
+
+        {isLast && (
+          <button
+            onClick={onBegin}
+            className="mt-8 px-7 py-3 rounded-full text-sm tracking-wide"
+            style={{
+              background: "linear-gradient(135deg,#F5C56B,#E0A94C)",
+              color: "#2a1c05",
+              fontFamily: "'Quicksand', sans-serif",
+              fontWeight: 700,
+              animation: "fadeInSoft 1.8s ease",
+              boxShadow: "0 4px 20px rgba(245,197,107,0.35)",
+            }}
+          >
+            Launch the Celebration 🚀
+          </button>
+        )}
+      </div>
+
+      {moonClicked && (
+        <button
+          onClick={onSkip}
+          className="absolute bottom-10 text-amber-100 text-xs tracking-widest uppercase"
+          style={{
+            fontFamily: "'Quicksand', sans-serif",
+            opacity: 0.8,
+            animation: "fadeInSoft 1s ease",
+            background: "none",
+            border: "1px solid rgba(245,197,107,0.5)",
+            borderRadius: 999,
+            padding: "8px 18px",
+          }}
+        >
+          Skip to My Gift →
+        </button>
+      )}
+    </div>
+  );
+}
+
+/* ================= LAUNCH DATE PUZZLE SCENE ================= */
+function DialColumn({ label, value, min, max, onChange, pad = 2 }) {
+  return (
+    <div className="flex flex-col items-center" style={{ gap: 6 }}>
+      <button
+        onClick={() => onChange(value >= max ? min : value + 1)}
+        aria-label={`Increase ${label}`}
+        style={{ background: "none", border: "none", color: "#F5C56B", fontSize: 20, cursor: "pointer", padding: 4 }}
+      >
+        ▲
+      </button>
+      <div
+        style={{
+          width: 74,
+          height: 64,
+          borderRadius: 10,
+          background: "linear-gradient(180deg,#151d3f,#0b1230)",
+          border: "1px solid rgba(245,197,107,0.35)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "'Playfair Display', serif",
+          fontSize: "1.7rem",
+          color: "#FFE9C2",
+          boxShadow: "inset 0 0 14px rgba(0,0,0,0.5)",
+        }}
+      >
+        {String(value).padStart(pad, "0")}
+      </div>
+      <button
+        onClick={() => onChange(value <= min ? max : value - 1)}
+        aria-label={`Decrease ${label}`}
+        style={{ background: "none", border: "none", color: "#F5C56B", fontSize: 20, cursor: "pointer", padding: 4 }}
+      >
+        ▼
+      </button>
+      <span style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.65rem", color: "#9BA6D4", letterSpacing: 1 }}>{label}</span>
+    </div>
+  );
+}
+
+function LaunchPuzzleScene({ onContinue }) {
+  const [month, setMonth] = useState(1);
+  const [day, setDay] = useState(1);
+  const [tries, setTries] = useState(0);
+  const [nudge, setNudge] = useState(false);
+  const [locked, setLocked] = useState(false);
+
+  const tryLaunch = () => {
+    if (month === LAUNCH_MONTH && day === LAUNCH_DAY) {
+      whoosh();
+      setLocked(true);
+    } else {
+      setTries((t) => t + 1);
+      setNudge(true);
+      setTimeout(() => setNudge(false), 500);
+    }
+  };
+
+  const hint =
+    tries === 0
+      ? "Every great pilot flies by her own flight log. Set the dials to her launch date."
+      : tries < 3
+      ? "Not quite, Captain. Hint: it's the day the sky got a little more brilliant. 🌤️"
+      : "Okay okay — it's July. Just find the day now. 😉";
+
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden px-6" style={{ background: "radial-gradient(ellipse at 50% 15%, #1a2550 0%, #070a1f 70%)" }}>
+      <Stars count={45} />
+      <Confetti show={locked} />
+
+      {!locked ? (
+        <div className="relative z-10 text-center" style={{ maxWidth: 420 }}>
+          <div style={{ fontSize: 34, marginBottom: 6 }}>🛰️</div>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", color: "#FFE9C2", marginBottom: 8 }}>
+            Mission Control: Decode The Launch Date
+          </h2>
+          <p style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.85rem", color: "#C9D3EE", marginBottom: 22, minHeight: 40 }}>
+            {hint}
+          </p>
+
+          <div
+            className="flex items-center justify-center gap-6"
+            style={{ animation: nudge ? "shakeNo 0.5s ease" : "none" }}
+          >
+            <DialColumn label="MONTH" value={month} min={1} max={12} onChange={setMonth} />
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", color: "#F5C56B" }}>/</div>
+            <DialColumn label="DAY" value={day} min={1} max={31} onChange={setDay} />
+          </div>
+
+          <button
+            onClick={tryLaunch}
+            className="mt-8 px-7 py-3 rounded-full text-sm"
+            style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700 }}
+          >
+            Confirm Launch Date 🚀
+          </button>
+        </div>
+      ) : (
+        <div className="relative z-10 text-center px-6" style={{ maxWidth: 420 }}>
+          <div style={{ fontSize: 46, animation: "popIn 1s ease" }}>🚀</div>
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "2rem",
+              color: "#FFE1A8",
+              textShadow: "0 0 26px rgba(255,225,168,0.6)",
+              animation: "popIn 1.2s ease",
+              marginTop: 6,
+            }}
+          >
+            Launch Confirmed: 07 / 09
+          </h2>
+          <p style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.9rem", color: "#C9D3EE", marginTop: 8, animation: "fadeInSoft 1.6s ease" }}>
+            Every year on this day, the sky got a little luckier. Mission Vani, cleared for liftoff. 🎉
+          </p>
+          <button
+            onClick={onContinue}
+            className="mt-9 px-7 py-3 rounded-full text-sm"
+            style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700, animation: "fadeInSoft 2s ease" }}
+          >
+            Continue The Mission →
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ================= CAKE / CANDLES SCENE ================= */
+function CakeScene({ onDone }) {
+  const [lit, setLit] = useState(Array(11).fill(false));
+  const [activeBlessing, setActiveBlessing] = useState(null); // {idx,title,text,color}
+  const [phase, setPhase] = useState("lighting"); // lighting -> aura -> message -> teddyline -> countdown -> blown -> celebrate
+  const [countdownVal, setCountdownVal] = useState(9);
+  const nextToLight = lit.findIndex((v) => !v);
+
+  const lightCandle = (idx) => {
+    if (idx !== nextToLight || phase !== "lighting") return;
+    chime(520 + idx * 28);
+    const next = [...lit];
+    next[idx] = true;
+    setLit(next);
+
+    if (idx < 10) {
+      const b = BLESSINGS[idx];
+      setActiveBlessing({ idx, ...b });
+    } else {
+      // 11th candle — make a wish
+      setActiveBlessing(null);
+      setPhase("aura");
+      setTimeout(() => setPhase("message"), 1400);
+      setTimeout(() => setPhase("teddyline"), 4600);
+      setTimeout(() => setPhase("countdown"), 8600);
+    }
+  };
+
+  useEffect(() => {
+    if (phase !== "countdown") return;
+    if (countdownVal === 0) {
+      whoosh();
+      setPhase("blown");
+      setTimeout(() => setPhase("celebrate"), 300);
+      return;
+    }
+    const t = setTimeout(() => setCountdownVal((v) => v - 1), 1000);
+    return () => clearTimeout(t);
+  }, [phase, countdownVal]);
+
+  const allLit = lit.every(Boolean);
+  const blownOut = phase === "blown" || phase === "celebrate";
+
+  return (
+    <div
+      className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden"
+      style={{ background: "radial-gradient(ellipse at 50% 25%, #1a2550 0%, #10173c 45%, #070a1f 100%)" }}
+    >
+      <Stars count={50} />
+      <Confetti show={phase === "celebrate"} />
+      <Fireworks show={phase === "celebrate"} />
+      <Balloons show={phase === "celebrate"} />
+
+      <div className="relative z-10 text-center px-6" style={{ maxWidth: 480 }}>
+        {phase === "celebrate" ? (
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "2.4rem",
+              color: "#FFE1A8",
+              textShadow: "0 0 30px rgba(255,225,168,0.6)",
+              animation: "popIn 1s ease",
+            }}
+          >
+            Happy Birthday, {HER_NAME}! 🎉
+          </h2>
+        ) : (
+          <>
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "1.5rem",
+                color: "#FFE9C2",
+                marginBottom: 6,
+              }}
+            >
+            {nextToLight === -1 ? "" : nextToLight === 10 ? "" : ""}
+            </h2>
+            <p style={{ fontFamily: "'Quicksand', sans-serif", color: "#C9D3EE", fontSize: "0.85rem" }}>
+              {nextToLight === 10 ? "This one is just for you." : ""}
+            </p>
+          </>
+        )}
+      </div>
+
+      {/* the cake */}
+      <div className="relative mt-2" style={{ width: 300, height: 170 }}>
+        {/* blessing float text */}
+        {activeBlessing && (
+          <div
+            key={activeBlessing.idx}
+            className="absolute left-1/2 text-center"
+            style={{
+              bottom: 195,
+              top: "auto",
+              zIndex: 20,
+              transform: "translateX(-50%)",
+              width: 270,
+              animation: "blessingIn 0.9s cubic-bezier(.2,.8,.3,1)",
+            }}
+          >
+            <div
+              style={{
+                padding: "14px 16px",
+                borderRadius: 14,
+                background: "rgba(10,14,40,0.55)",
+                border: `1px solid ${activeBlessing.color}55`,
+                boxShadow: `0 0 26px 4px ${activeBlessing.color}33`,
+                backdropFilter: "blur(2px)",
+              }}
+            >
+              <div style={{ fontSize: "0.85rem", marginBottom: 2 }}>✨</div>
+              <div
+                style={{
+                  fontFamily: "'Caveat', cursive",
+                  fontSize: "1.05rem",
+                  fontWeight: 700,
+                  color: activeBlessing.color,
+                  textShadow: `0 0 14px ${activeBlessing.color}88`,
+                }}
+              >
+                {activeBlessing.title}
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Caveat', cursive",
+                  fontSize: "1.15rem",
+                  color: "#FFF6E4",
+                  marginTop: 2,
+                  textShadow: "0 0 10px rgba(255,255,255,0.35)",
+                }}
+              >
+                &ldquo;{activeBlessing.text}&rdquo;
+              </div>
+            </div>
+          </div>
+        )}
+
+        {phase === "message" && (
+          <div
+            className="absolute left-1/2 text-center"
+            style={{
+              top: -100,
+              transform: "translateX(-50%)",
+              width: 300,
+              fontFamily: "'Caveat', cursive",
+              fontSize: "1.3rem",
+              color: "#FFE1A8",
+              animation: "fadeInSoft 1.2s ease",
+            }}
+          >
+            Every light carries a wish.<br />Every wish carries love.
+          </div>
+        )}
+        {phase === "teddyline" && (
+          <div className="absolute left-1/2 text-center" style={{ top: -150, transform: "translateX(-50%)", width: 280 }}>
+            <Teddy size={40} style={{ margin: "0 auto" }} />
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: "1.2rem", color: "#FFE9C2", marginTop: 4, animation: "fadeInSoft 1s ease" }}>
+              &ldquo;Now it&rsquo;s your turn... close your eyes, make a wish, and let the stars keep your secret.&rdquo;
+            </div>
+          </div>
+        )}
+        {phase === "countdown" && (
+          <div
+            className="absolute left-1/2"
+            style={{
+              top: -110,
+              transform: "translateX(-50%)",
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "3rem",
+              color: "#FFE1A8",
+              textShadow: "0 0 24px rgba(255,225,168,0.7)",
+            }}
+            key={countdownVal}
+          >
+            {countdownVal > 0 ? countdownVal : "🌬️"}
+          </div>
+        )}
+
+        {/* golden aura */}
+        {(phase === "aura" || phase === "message" || phase === "teddyline" || phase === "countdown") && (
+          <div
+            className="absolute inset-0"
+            style={{
+              borderRadius: "50%",
+              boxShadow: "0 0 55px 18px rgba(245,197,107,0.25)",
+              animation: "pulseGlow 2s ease-in-out infinite",
+              pointerEvents: "none",
+            }}
+          />
+        )}
+
+        {/* cake layers */}
+        <div className="absolute bottom-0 left-1/2" style={{ transform: "translateX(-50%)", width: 260, height: 60, background: "linear-gradient(180deg,#F8D9A0,#E7B979)", borderRadius: "10px 10px 4px 4px" }} />
+        <div className="absolute" style={{ bottom: 55, left: "50%", transform: "translateX(-50%)", width: 210, height: 55, background: "linear-gradient(180deg,#F3B7C4,#E092A4)", borderRadius: "10px 10px 4px 4px" }} />
+        <div className="absolute" style={{ bottom: 104, left: "50%", transform: "translateX(-50%)", width: 160, height: 45, background: "linear-gradient(180deg,#F5C56B,#E0A94C)", borderRadius: "10px 10px 4px 4px" }} />
+
+        {/* candles */}
+        {Array.from({ length: 11 }).map((_, i) => {
+          const leftPct = 12 + i * 7.2;
+          const isLit = lit[i];
+          const isNext = i === nextToLight;
+          return (
+            <button
+              key={i}
+              onClick={() => lightCandle(i)}
+              aria-label={`Candle ${i + 1}`}
+              className="absolute"
+              style={{
+                left: `${leftPct}%`,
+                bottom: 148,
+                width: 5,
+                height: 22,
+                background: "linear-gradient(180deg,#fff,#ffe9c2)",
+                border: "none",
+                borderRadius: 2,
+                cursor: isNext && phase === "lighting" ? "pointer" : "default",
+                boxShadow: isNext && phase === "lighting" ? "0 0 10px 2px rgba(245,197,107,0.6)" : "none",
+              }}
+            >
+              {isLit && !blownOut && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: -12,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: 7,
+                    height: 11,
+                    borderRadius: "50% 50% 50% 50%/60% 60% 40% 40%",
+                    background: `radial-gradient(circle,#fff8e1 0%, ${BLESSINGS[i]?.color || WISH_COLOR} 70%)`,
+                    animation: "flicker 0.6s ease-in-out infinite alternate",
+                    boxShadow: `0 0 8px 2px ${BLESSINGS[i]?.color || WISH_COLOR}`,
+                  }}
+                />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {phase === "celebrate" && (
+        <button
+          onClick={onDone}
+          className="relative z-10 mt-10 px-7 py-3 rounded-full text-sm"
+          style={{
+            background: "linear-gradient(135deg,#F5C56B,#E0A94C)",
+            color: "#2a1c05",
+            fontFamily: "'Quicksand', sans-serif",
+            fontWeight: 700,
+            animation: "fadeInSoft 2s ease",
+          }}
+        >
+          Continue →
+        </button>
+      )}
+    </div>
+  );
+}
+
+/* ================= TRANSITION SCENE ================= */
+function TransitionScene({ onContinue }) {
+  const lines = ["Every birthday marks a new chapter...", "But some gifts don't fit inside a box..."];
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    if (idx >= lines.length - 1) return;
+    const t = setTimeout(() => setIdx((i) => i + 1), 2600);
+    return () => clearTimeout(t);
+  }, [idx]);
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center" style={{ background: "#070a1f" }}>
+      <Stars count={40} />
+      <p
+        key={idx}
+        className="relative z-10 text-center px-8"
+        style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "1.4rem", color: "#F3E9D2", animation: "fadeInSoft 1.4s ease", maxWidth: 420 }}
+      >
+        {lines[idx]}
+      </p>
+      {idx === lines.length - 1 && (
+        <button
+          onClick={onContinue}
+          className="relative z-10 mt-8 px-7 py-3 rounded-full text-sm"
+          style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700, animation: "fadeInSoft 2s ease" }}
+        >
+          See What We Made For You 🎁
+        </button>
+      )}
+    </div>
+  );
+}
+
+/* ================= GIFT SCENE ================= */
+function GiftScene({ onOpened }) {
+  const [lineIdx, setLineIdx] = useState(0);
+  const [showBox, setShowBox] = useState(false);
+  const [ready, setReady] = useState(false);
+  const isLastLine = lineIdx === GIFT_LINES.length - 1;
+
+  useEffect(() => {
+    if (isLastLine) {
+      const t = setTimeout(() => setShowBox(true), 1800);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => setLineIdx((i) => i + 1), 2000);
+    return () => clearTimeout(t);
+  }, [lineIdx, isLastLine]);
+
+  useEffect(() => {
+    if (!showBox) return;
+    const t = setTimeout(() => setReady(true), 2600);
+    return () => clearTimeout(t);
+  }, [showBox]);
+
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden" style={{ background: "radial-gradient(ellipse at 50% 20%, #1a2550 0%, #070a1f 70%)" }}>
+      <Stars count={40} />
+
+      {!showBox && (
+        <div className="relative z-10 text-center px-6" style={{ maxWidth: 380 }}>
+          <Teddy size={70} style={{ margin: "0 auto 14px" }} />
+          <p key={lineIdx} style={{ fontFamily: "'Caveat', cursive", fontSize: "1.6rem", color: "#FFE9C2", animation: "fadeInSoft 1s ease" }}>
+            &ldquo;{GIFT_LINES[lineIdx]}&rdquo;
+          </p>
+        </div>
+      )}
+
+      {showBox && (
+        <div className="relative z-10 flex flex-col items-center">
+          {/* floating memory icons orbiting */}
+          <div className="relative" style={{ width: 220, height: 220 }}>
+            {["📷", "🎫", "☕", "✈️", "🌸", "⭐"].map((icon, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  fontSize: 20,
+                  animation: `orbit 6s linear ${i * -1}s infinite`,
+                  transformOrigin: "0 0",
+                }}
+              >
+                <span style={{ display: "inline-block", transform: `rotate(${i * 60}deg) translateX(90px)` }}>{icon}</span>
+              </div>
+            ))}
+            {/* box */}
+            <div
+              className="absolute"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%,-50%)",
+                width: 110,
+                height: 90,
+                background: "linear-gradient(135deg,#F4A6A0,#E0827A)",
+                borderRadius: 8,
+                boxShadow: "0 0 50px 12px rgba(245,197,107,0.45)",
+                animation: "pulseGlow 2.4s ease-in-out infinite",
+              }}
+            >
+              <div style={{ position: "absolute", top: "50%", left: 0, right: 0, height: 14, background: "#F5C56B", transform: "translateY(-50%)" }} />
+              <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 14, background: "#F5C56B", transform: "translateX(-50%)" }} />
+            </div>
+          </div>
+
+          <div className="text-center mt-6" style={{ minHeight: 90 }}>
+            <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: "#FFE1A8", animation: "fadeInSoft 1.4s ease" }}>
+              For {HER_NAME} ❤️
+            </p>
+            {ready && (
+              <>
+                <p style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.85rem", color: "#C9D3EE", marginTop: 4, animation: "fadeInSoft 1.4s ease" }}>
+                  Open when you&rsquo;re ready.
+                </p>
+                <button
+                  onClick={onOpened}
+                  className="mt-5 px-7 py-3 rounded-full text-sm"
+                  style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700, animation: "fadeInSoft 1.8s ease" }}
+                >
+                  Open My Gift 🎁
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ================= REVEAL SCENE ================= */
+function RevealScene({ onContinue }) {
+  const [flash, setFlash] = useState(true);
+  useEffect(() => {
+    shutterClick();
+    const t = setTimeout(() => setFlash(false), 700);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden" style={{ background: "linear-gradient(180deg,#3a2a1f,#1a1410)" }}>
+      {flash && <div className="absolute inset-0 z-50" style={{ background: "#fff", animation: "flashOut 0.9s ease forwards" }} />}
+      <div className="relative z-10 text-center px-6">
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.6rem", color: "#FBE7C6", animation: "popIn 1.4s ease", textShadow: "0 0 26px rgba(251,231,198,0.4)" }}>
+          Our Journey
+        </h1>
+        <div style={{ fontFamily: "'Caveat', cursive", fontSize: "1.3rem", color: "#E8C99B", marginTop: 10, animation: "fadeInSoft 2.2s ease" }}>
+          Four friends. Nine years. Countless memories.
+        </div>
+        <button
+          onClick={onContinue}
+          className="mt-9 px-7 py-3 rounded-full text-sm"
+          style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700, animation: "fadeInSoft 2.6s ease" }}
+        >
+          Turn The Page ❤️
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ================= LOVE LETTER SCENE ================= */
+function StampEdge({ bg, side }) {
+  const dots = Array.from({ length: 22 });
+  return (
+    <div
+      className="absolute left-0 right-0 flex justify-between px-1"
+      style={{ [side]: -7, pointerEvents: "none" }}
+    >
+      {dots.map((_, i) => (
+        <div key={i} style={{ width: 13, height: 13, borderRadius: "50%", background: bg, flexShrink: 0 }} />
+      ))}
+    </div>
+  );
+}
+
+function LoveLetterScene({ onContinue }) {
+  const [idx, setIdx] = useState(0);
+  const isLast = idx === LOVE_LETTER_LINES.length - 1;
+  useEffect(() => {
+    if (isLast) return;
+    const t = setTimeout(() => setIdx((i) => i + 1), 2400);
+    return () => clearTimeout(t);
+  }, [idx, isLast]);
+
+  const SCENE_BG = "#5e0f1c";
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden p-6" style={{ background: `linear-gradient(180deg, ${SCENE_BG}, #2b0509)` }}>
+      <Stars count={20} />
+      <div
+        className="relative"
+        style={{
+          width: "100%",
+          maxWidth: 400,
+          background: "#FFFDF7",
+          borderRadius: 6,
+          padding: "34px 26px 30px",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
+          animation: "fadeInSoft 1.2s ease",
+        }}
+      >
+        <StampEdge bg={SCENE_BG} side="top" />
+        <StampEdge bg={SCENE_BG} side="bottom" />
+
+        <h2
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "1.5rem",
+            letterSpacing: 2,
+            textAlign: "center",
+            color: "#7A1424",
+            marginBottom: 18,
+          }}
+        >
+          Dear Vani
+        </h2>
+
+        <div className="flex items-center justify-between mb-5 gap-3">
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.65rem", color: "#8A7659", letterSpacing: 1 }}>TO</div>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: "1.2rem", color: "#3B2E1E", borderBottom: "1px solid #E2D6BC", paddingBottom: 2 }}>{HER_NAME}</div>
+            <div style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.65rem", color: "#8A7659", letterSpacing: 1, marginTop: 8 }}>FROM</div>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: "1.2rem", color: "#3B2E1E", borderBottom: "1px solid #E2D6BC", paddingBottom: 2 }}>{YOUR_NAME}</div>
+          </div>
+          <div className="flex gap-2">
+            {PHOTOS.slice(0, 2).map((p, i) => (
+              <div key={i} style={{ background: "#fff", padding: 4, boxShadow: "0 4px 10px rgba(0,0,0,0.25)", transform: `rotate(${i === 0 ? -6 : 5}deg)` }}>
+                <img src={p.src} alt="" style={{ width: 46, height: 58, objectFit: "cover", display: "block" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ minHeight: 150 }}>
+          {LOVE_LETTER_LINES.slice(0, idx + 1).map((line, i) => (
+            <p
+              key={i}
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: i === 0 ? "1.5rem" : "1.25rem",
+                fontWeight: i === 0 ? 700 : 400,
+                color: "#3B2E1E",
+                marginBottom: 8,
+                animation: "fadeInSoft 1s ease",
+              }}
+            >
+              {line}
+            </p>
+          ))}
+        </div>
+
+        {isLast && (
+          <div className="flex items-center justify-between mt-4" style={{ animation: "fadeInSoft 1.6s ease" }}>
+            <p style={{ fontFamily: "'Caveat', cursive", fontSize: "1.1rem", color: "#8A7659" }}>— your bf, {YOUR_NAME}</p>
+            <div
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: "50%",
+                background: "radial-gradient(circle at 35% 30%, #B23A45, #6b1220)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 4px 10px rgba(0,0,0,0.35)",
+              }}
+            >
+              <Heart size={16} color="#FFE1C2" fill="#FFE1C2" />
+            </div>
+          </div>
+        )}
+
+        {isLast && (
+          <button
+            onClick={onContinue}
+            className="mt-6 w-full px-6 py-3 rounded-full text-sm"
+            style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700, animation: "fadeInSoft 2s ease" }}
+          >
+            Keep Reading Our Story →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ================= FULL-PAGE MEMORY FLIPBOOK SCENE ================= */
+function FlipbookPage({ page }) {
+  return (
+    <div className="absolute inset-0" style={{ background: page.accent }}>
+      {page.type === "video" ? (
+        <video src={page.src} controls style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+      ) : (
+        <img src={page.src} alt={page.caption} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+      )}
+      <div
+        className="absolute left-0 right-0 bottom-0 px-6 pb-8 pt-14"
+        style={{ background: "linear-gradient(180deg, transparent, rgba(0,0,0,0.75))", pointerEvents: "none" }}
+      >
+        <p style={{ fontFamily: "'Caveat', cursive", fontSize: "1.3rem", color: "#FFE9C2" }}>{page.caption}</p>
+      </div>
+    </div>
+  );
+}
+
+function FlipbookScene({ onContinue }) {
+  const [index, setIndex] = useState(0);
+  const [anim, setAnim] = useState(null); // { fromPage, direction }
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    stopMelody(); // pause the ambient music-box tune so it doesn't clash with the song
+    const audio = audioRef.current;
+    if (audio) {
+      audio.volume = 0.55;
+      audio.play().catch(() => {}); // ignored if the browser blocks it or the file isn't there yet
+    }
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      startMelody(); // resume the ambient tune once you leave the flipbook
+    };
+  }, []);
+
+  const go = (dir) => {
+    if (anim) return;
+    const from = MEMORY_PAGES[index];
+    setAnim({ fromPage: from, direction: dir });
+    setTimeout(() => {
+      setIndex((i) => (dir === "next" ? (i + 1) % MEMORY_PAGES.length : (i - 1 + MEMORY_PAGES.length) % MEMORY_PAGES.length));
+      setAnim(null);
+    }, 700);
+  };
+
+  const current = MEMORY_PAGES[index];
+
+  return (
+    <div className="relative w-full h-full overflow-hidden" style={{ background: "#000", perspective: 1800 }}>
+      <audio ref={audioRef} src={FLIPBOOK_SONG} loop />
+      {/* base layer: the page being revealed */}
+      <FlipbookPage page={current} />
+
+      {/* static center spine shadow, like a real bound book */}
+      <div
+        className="absolute inset-y-0 pointer-events-none"
+        style={{ left: "50%", width: 46, transform: "translateX(-50%)", background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.25), transparent)", zIndex: 5 }}
+      />
+
+      {/* flipping top layer: the page being left, curling away like real paper */}
+      {anim && (
+        <div
+          className="absolute inset-0"
+          style={{
+            transformOrigin: anim.direction === "next" ? "left center" : "right center",
+            animation: `${anim.direction === "next" ? "pageFlipNext" : "pageFlipPrev"} 0.7s cubic-bezier(.37,0,.24,1) forwards`,
+            boxShadow: "0 0 50px rgba(0,0,0,0.65)",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
+            willChange: "transform",
+            zIndex: 6,
+          }}
+        >
+          <FlipbookPage page={anim.fromPage} />
+          {/* curl shadow — darkens near the turning edge and sweeps across as it rotates */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                anim.direction === "next"
+                  ? "linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.05) 40%, transparent 70%)"
+                  : "linear-gradient(270deg, rgba(0,0,0,0.45), rgba(0,0,0,0.05) 40%, transparent 70%)",
+              animation: `${anim.direction === "next" ? "curlShadowNext" : "curlShadowPrev"} 0.7s cubic-bezier(.37,0,.24,1) forwards`,
+            }}
+          />
+        </div>
+      )}
+
+      <div className="absolute top-5 left-0 right-0 flex items-center justify-center z-10 pointer-events-none">
+        <span
+          style={{
+            fontFamily: "'Quicksand', sans-serif",
+            fontSize: "0.7rem",
+            color: "#FFE9C2",
+            background: "rgba(0,0,0,0.35)",
+            padding: "5px 14px",
+            borderRadius: 999,
+            letterSpacing: 1,
+          }}
+        >
+          {index + 1} / {MEMORY_PAGES.length}
+        </span>
+      </div>
+
+      <button
+        onClick={() => go("prev")}
+        aria-label="Previous page"
+        className="absolute z-10"
+        style={{
+          left: 14,
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: 42,
+          height: 42,
+          borderRadius: "50%",
+          background: "rgba(0,0,0,0.4)",
+          border: "1px solid rgba(245,197,107,0.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+        }}
+      >
+        <ChevronLeft size={22} color="#F5C56B" />
+      </button>
+      <button
+        onClick={() => go("next")}
+        aria-label="Next page"
+        className="absolute z-10"
+        style={{
+          right: 14,
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: 42,
+          height: 42,
+          borderRadius: "50%",
+          background: "rgba(0,0,0,0.4)",
+          border: "1px solid rgba(245,197,107,0.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+        }}
+      >
+        <ChevronRight size={22} color="#F5C56B" />
+      </button>
+
+      {index === MEMORY_PAGES.length - 1 && (
+        <button
+          onClick={onContinue}
+          className="absolute z-10 bottom-7 left-1/2 px-6 py-2.5 rounded-full text-sm"
+          style={{
+            transform: "translateX(-50%)",
+            background: "linear-gradient(135deg,#F5C56B,#E0A94C)",
+            color: "#2a1c05",
+            fontFamily: "'Quicksand', sans-serif",
+            fontWeight: 700,
+            boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
+            animation: "fadeInSoft 1s ease",
+          }}
+        >
+          Continue →
+        </button>
+      )}
+    </div>
+  );
+}
+
+/* ================= FUN FACTS FLIP-CARD SCENE ================= */
+function FunFactCard({ fact, index }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <button
+      onClick={() => setFlipped((f) => !f)}
+      aria-label="Flip card"
+      style={{
+        width: 128,
+        height: 128,
+        perspective: 800,
+        background: "none",
+        border: "none",
+        cursor: "pointer",
+        padding: 0,
+        animation: `fadeInSoft ${0.8 + index * 0.15}s ease`,
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          transition: "transform 0.6s cubic-bezier(.4,.2,.2,1)",
+          transformStyle: "preserve-3d",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backfaceVisibility: "hidden",
+            borderRadius: 12,
+            background: "linear-gradient(135deg,#1a2550,#0b1230)",
+            border: "1px solid rgba(245,197,107,0.4)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 36,
+            boxShadow: "0 0 18px rgba(245,197,107,0.15)",
+          }}
+        >
+          {fact.front}
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+            borderRadius: 12,
+            background: "#FFFDF7",
+            border: "1px solid #E0A94C",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 10,
+          }}
+        >
+          <p style={{ fontFamily: "'Caveat', cursive", fontSize: "0.95rem", color: "#3B2E1E", textAlign: "center", lineHeight: 1.25 }}>
+            {fact.back}
+          </p>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function FunFactsScene({ onContinue }) {
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden px-6 py-8" style={{ background: "radial-gradient(ellipse at 50% 10%, #1a2550 0%, #070a1f 70%)" }}>
+      <Stars count={30} />
+      <div className="relative z-10 text-center mb-6" style={{ maxWidth: 400 }}>
+        <div style={{ fontSize: 26 }}>🃏</div>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: "#FFE9C2" }}>Classified Facts About You</h2>
+        <p style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.8rem", color: "#C9D3EE", marginTop: 4 }}>
+          Tap each card, Captain. 🔎
+        </p>
+      </div>
+
+      <div className="relative z-10 grid grid-cols-3 gap-4">
+        {FUN_FACTS.map((f, i) => (
+          <FunFactCard key={i} fact={f} index={i} />
+        ))}
+      </div>
+
+      <button
+        onClick={onContinue}
+        className="relative z-10 mt-9 px-7 py-3 rounded-full text-sm"
+        style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700, animation: "fadeInSoft 2s ease" }}
+      >
+        Last Page →
+      </button>
+    </div>
+  );
+}
+
+/* ================= KANNADA RIDDLES SCENE ================= */
+// RIDDLES: replace with your real Kannada riddles — add as many as you like (5, 10, 15, whatever),
+// the scene automatically picks a random one each time, no other changes needed.
+const RIDDLES = [
+  { q: "ಕಾಲಿಲ್ಲದೆ ನಡೆಯುವುದು, ಬಾಯಿಲ್ಲದೆ ನುಡಿಯುವುದು, ಇದರ ಹೊಟ್ಟೆ ಹಲವರಿಗೆ ಮನೆಯಾಗಿರುವುದು.", a: "ನದಿ" },
+  { q: "ಕುಡಿಕೆಯಲ್ಲಿ ಮೆಣಸು.", a: "ಪರಂಗಿ ಹಣ್ಣು (ಪಪ್ಪಾಯಿ)" },
+  { q: "ಹಿಡಿ ಹಿಡಿದರೆ ಹಿಡಿ ತುಂಬಾ, ಬಿಡಿ ಬಿಡಿದರೆ ಏನೂ ಇಲ್ಲ.", a: "ಹೊಗೆ" },
+  { q: "ಕರಿ ಮಂಚದ ಮೇಲೆ ಹಾಕುವ ಹಾಸಿಗೆ, ತೆಗೆಯುವ ಹಾಸಿಗೆ.", a: "ಕಾವಲಿ ದೋಸೆ" },
+  { q: "ಅಪ್ಪ ಅಪ್ಪ ಮರ ನೋಡು, ಮರದೊಳಗೆ ಎಲೆ ನೋಡು, ಎಲೆಯೊಳಗೆ ತೂತು ನೋಡು, ತೂತೊಳಗೆ ಮಾತು ನೋಡು.", a: "ಪುಸ್ತಕ" },
+  { q: "ಅಟ್ಟದ ತುಂಬಾ ಹಗ್ಗ ಹಾಸೈತೆ, ಅದರ ಮೇಲೆ ಭೂತ ಕೂತವ್ನೆ.", a: "ಕುಂಬಳಕಾಯಿ" },
+  { q: "ಅಂಗಡಿಯಲ್ಲಿ ಮಾರುವುದಿಲ್ಲ, ತಕ್ಕಡಿಯಲ್ಲಿ ತೂಗುವುದಿಲ್ಲ, ಅದಿಲ್ಲದಿದ್ದರೆ ನಮ್ಮ ಮನೆಯಲ್ಲಿ ಹಬ್ಬ ಆಗುವುದೇ ಇಲ್ಲ.", a: "ತೋರಣ" },
+  { q: "ಒಂದು ಸುಣ್ಣದ ಗೋದೆಗೆ ಒಂದೂ ಬಾಗಲಿಲ್ಲ.", a: "ಮೊಟ್ಟೆ" },
+  { q: "ಕರೀ ಹುಡುಗನಿಗೆ ಬಿಳೀ ಟೋಪಿ.", a: "ಬೆಂಕಿಕಡ್ಡಿ" },
+  { q: "ಚಿನ್ನದ ಪೆಟ್ಟಿಗೆಯಲ್ಲಿ ಬೆಳ್ಳಿ ಲಿಂಗ.", a: "ಮೊಟ್ಟೆ" },
+  { q: "ನಾರಾಯಣ ಕಟ್ಟಿಸಿದ ನಾಲ್ಕು ಮೂಲೆ ಬಾವಿ, ನೀರಿಲ್ಲ ಮೀನಿಲ್ಲ.", a: "ಹಾಸಿಗೆ" },
+  { q: "ದಾನ ಗುಂಬಳ, ಪಾನ ಗುಂಬಳ, ಊರಿಗೆಲ್ಲ ಒಂದೇ ಕುಂಬಳ.", a: "ಚಂದ್ರ" },
+  { q: "ತಲೆ ಮೇಲೆ ಹರಳು, ಬಾಯಲ್ಲಿ ಬೆರಳು.", a: "ಜೋಳದ ತೆನೆ" },
+  { q: "ಆಕಾಶದಲ್ಲಿ ಅಸಂಖ್ಯ ಕುಡುಗೋಲು.", a: "ನಕ್ಷತ್ರಗಳು" },
+  { q: "ಅಂಗೈಯಲ್ಲಿನ ರೊಟ್ಟಿಗೆ ಲೆಕ್ಕವಿಲ್ಲದಷ್ಟು ಉಪ್ಪಿನಕಾಯಿ.", a: "ಆಕಾಶ ಮತ್ತು ನಕ್ಷತ್ರಗಳು" },
+  { q: "ಒಂದು ಮರದಲ್ಲಿ ಹನ್ನೆರಡು ಕೊಂಬೆ, ಪ್ರತಿ ಕೊಂಬೆಯಲ್ಲಿ ಮೂವತ್ತು ಎಲೆ.", a: "ವರ್ಷ" },
+  { q: "ತಿನ್ನುತ್ತಾ ಕುಡಿಯುತ್ತದೆ, ಕುಡಿಯುತ್ತಾ ತಿನ್ನುತ್ತದೆ.", a: "ಬೆಂಕಿ" },
+  { q: "ಒಡೆದರೆ ಮಾತ್ರ ಕೆಲಸಕ್ಕೆ ಬರುತ್ತೇನೆ.", a: "ಮೊಟ್ಟೆ" },
+  { q: "ಕೈಯಿಲ್ಲ, ಕಾಲಿಲ್ಲ, ಮನೆ ಮನೆಗೆ ಹೋಗುತ್ತೇನೆ.", a: "ಪತ್ರ" },
+  { q: "ಬಾಯಿಲ್ಲ, ಹಲ್ಲಿಲ್ಲ, ಆದರೆ ಕಚ್ಚುತ್ತೇನೆ.", a: "ಚಳಿ" },
+  { q: "ನಿಂತರೆ ಉದ್ದ, ಮಲಗಿದರೆ ಚಿಕ್ಕದು.", a: "ನೆರಳು" },
+  { q: "ಕಪ್ಪು ಹೊಲದಲ್ಲಿ ಬಿಳಿ ಬೀಜ.", a: "ಚಾಕ್‌ನಿಂದ ಬರೆದ ಫಲಕ" },
+  { q: "ಮನೆ ತುಂಬ ಮಕ್ಕಳು, ಬಾಗಿಲೇ ಇಲ್ಲ.", a: "ದಾಳಿಂಬೆ" },
+  { q: "ತಾಯಿ ಹಸಿರು, ಮಕ್ಕಳು ಮುತ್ತಿನಂತೆ.", a: "ಬಟಾಣಿ" },
+  { q: "ಮರದ ಮೇಲೆ ಮನೆ, ಮನೆಯೊಳಗೆ ನೀರು.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ಅಮ್ಮ ಸೀರೆ ಬಿಚ್ಚಿದಳು, ಊರೆಲ್ಲ ಮಲಗಿತು.", a: "ರಾತ್ರಿ" },
+  { q: "ಅಮ್ಮ ಹಸಿರು, ಮಕ್ಕಳು ಕೆಂಪು, ಮೊಮ್ಮಕ್ಕಳು ಕಪ್ಪು.", a: "ಕಲ್ಲಂಗಡಿ" },
+  { q: "ಅಪ್ಪ ಕಪ್ಪು, ಅಮ್ಮ ಬಿಳಿ, ಮಕ್ಕಳು ಹಸಿರು.", a: "ಏಲಕ್ಕಿ" },
+  { q: "ತಿಂದರೆ ಅಳು, ತಿನ್ನದಿದ್ದರೆ ಬೇಸರ.", a: "ಈರುಳ್ಳಿ" },
+  { q: "ನನ್ನನ್ನು ನೋಡಿ ಎಲ್ಲರೂ ನಗುತ್ತಾರೆ, ನನ್ನನ್ನು ತಿಂದರೆ ಎಲ್ಲರೂ ಅಳುತ್ತಾರೆ.", a: "ಮೆಣಸಿನಕಾಯಿ" },
+  { q: "ಒಂದು ಮನೆಯಲ್ಲಿಬ್ಬರು ಅಣ್ಣತಮ್ಮಂದಿರು, ಯಾವತ್ತೂ ಭೇಟಿಯಾಗುವುದಿಲ್ಲ.", a: "ಕಣ್ಣುಗಳು" },
+  { q: "ಕೈ ಇದೆ, ಬೆರಳು ಇಲ್ಲ.", a: "ಬಾಳೆ ಎಲೆ" },
+  { q: "ತಲೆ ಇದೆ, ಕೂದಲು ಇಲ್ಲ; ಕಾಲು ಇದೆ, ನಡೆಯುವುದಿಲ್ಲ.", a: "ಅಣಬೆ" },
+  { q: "ಮನೆಯ ಮೇಲೊಬ್ಬ ರಾಜ, ಯಾರೂ ಕೆಳಗಿಳಿಸಲಾರರು.", a: "ಹೆಂಚಿನ ಮೇಲಿನ ಕುಂಬಳಕಾಯಿ" },
+  { q: "ನನ್ನ ಹೊಟ್ಟೆ ಕತ್ತರಿಸಿದರೆ ನಿಮ್ಮ ಹೊಟ್ಟೆ ತುಂಬುತ್ತದೆ.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ಹುಟ್ಟಿದ್ದು ಕಾಡಿನಲ್ಲಿ, ಸಾಯುವುದು ಅಡುಗೆಮನೆಯಲ್ಲಿ.", a: "ಕಟ್ಟಿಗೆ" },
+  { q: "ಅಣ್ಣ ಹೊರಗೆ ನಿಂತಿದ್ದಾನೆ, ತಮ್ಮ ಒಳಗೆ ಮಲಗಿದ್ದಾನೆ.", a: "ಬಾಳೆಹಣ್ಣು" },
+  { q: "ಬಟ್ಟೆ ತೆಗೆದರೆ ಮಾತ್ರ ನನ್ನ ಬೆಲೆ.", a: "ಬಾಳೆಹಣ್ಣು" },
+  { q: "ಮನೆ ಇದೆ, ಬಾಗಿಲಿಲ್ಲ; ಒಳಗೆ ನೀರು.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ತಲೆ ಒಡೆದರೆ ಮಾತ್ರ ನನ್ನ ಮಾತು ಕೇಳುತ್ತೀರಿ.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ಬೆಂಕಿಗೆ ಹಾಕಿದಷ್ಟು ನಾನು ಚೆನ್ನಾಗುತ್ತೇನೆ.", a: "ಅಪ್ಪಳ" },
+  { q: "ನಾನು ಕುಳಿತರೆ ಎಲ್ಲರೂ ಎದ್ದುನಿಲ್ಲುತ್ತಾರೆ.", a: "ಶಾಲೆಯ ಗಂಟೆ" },
+  { q: "ನನ್ನನ್ನು ಹೊಡೆದರೆ ನಾನು ಹಾಡುತ್ತೇನೆ.", a: "ಡೋಲು" },
+  { q: "ನನ್ನನ್ನು ಎಳೆದರೆ ಉದ್ದವಾಗುತ್ತೇನೆ, ಬಿಟ್ಟರೆ ಚಿಕ್ಕವನಾಗುತ್ತೇನೆ.", a: "ರಬ್ಬರ್ ಬ್ಯಾಂಡ್" },
+  { q: "ಮನೆಗೆ ಬಂದರೆ ಎಲ್ಲರೂ ಓಡಿಸುತ್ತಾರೆ, ಹೋದರೆ ಹುಡುಕುತ್ತಾರೆ.", a: "ವಿದ್ಯುತ್" },
+  { q: "ಒಬ್ಬನಿಗೆ ಸಾವಿರ ಕಣ್ಣು, ಆದರೆ ಒಂದನ್ನೂ ಮಿಟುಕಿಸಲಾರ.", a: "ಜಾಲರಿ" },
+  { q: "ಬಾಯಿ ತೆರೆದರೆ ಹೊಗೆ, ಬಾಯಿ ಮುಚ್ಚಿದರೆ ಸಾವು.", a: "ಒಲೆ" },
+  { q: "ಕೂದಲು ಇಲ್ಲದ ತಲೆ, ಎಲ್ಲರೂ ಸವರುತ್ತಾರೆ.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ನಾನು ಸತ್ತರೆ ಎಲ್ಲರೂ ತಿನ್ನುತ್ತಾರೆ.", a: "ಮೀನು" },
+  { q: "ನಾನು ಓಡಿದರೆ ನೀನು ನಿಲ್ಲುತ್ತೀಯ, ನಾನು ನಿಂತರೆ ನೀನು ಓಡುತ್ತೀಯ.", a: "ಟ್ರಾಫಿಕ್ ಸಿಗ್ನಲ್" },
+  { q: "ಬಟ್ಟೆ ಬಿಚ್ಚಿದರೆ ಮಾತ್ರ ಎಲ್ಲರಿಗೂ ಇಷ್ಟ.", a: "ಬಾಳೆಹಣ್ಣು" },
+  { q: "ಹೊಟ್ಟೆ ಕತ್ತರಿಸಿದರೆ ಎಲ್ಲರಿಗೂ ಹಂಚಬಹುದು.", a: "ಕಲ್ಲಂಗಡಿ" },
+  { q: "ತಲೆ ಒಡೆದರೆ ಮಾತ್ರ ಒಳಗಿನ ಸೊಗಸು ಕಾಣುತ್ತದೆ.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ಎಷ್ಟು ಒತ್ತಿದರೂ ಬಾಯೇ ತೆಗೆಯುವುದಿಲ್ಲ.", a: "ಮೊಟ್ಟೆ" },
+  { q: "ಮೇಲೆ ಕೂದಲು, ಒಳಗೆ ಹಾಲು.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ಅಂಗಡಿಯಿಂದ ತಂದ ಕೂಡಲೇ ತಲೆ ಕತ್ತರಿಸುತ್ತಾರೆ.", a: "ಎಲೆಕೋಸು" },
+  { q: "ಒಳಗೆ ಹೋದರೆ ಕಾಣುವುದಿಲ್ಲ, ಹೊರಗೆ ಬಂದರೆ ಎಲ್ಲರೂ ನೋಡುತ್ತಾರೆ.", a: "ಸೂರ್ಯ" },
+  { q: "ಕುತ್ತಿಗೆ ಕತ್ತರಿಸಿದರೆ ಮಾತ್ರ ಅಡುಗೆಗೆ ಬರುತ್ತದೆ.", a: "ಸೊಪ್ಪಿನ ಕಟ್ಟು" },
+  { q: "ನೀರಿನಲ್ಲಿ ನೆನೆಸಿದರೆ ಮೃದುವಾಗುತ್ತೇನೆ.", a: "ಅಕ್ಕಿ" },
+  { q: "ನನ್ನನ್ನು ಹೊಡೆದಷ್ಟೂ ಸಿಹಿಯಾಗುತ್ತೇನೆ.", a: "ಕಬ್ಬು" },
+  { q: "ನನ್ನನ್ನು ಸಿಪ್ಪೆ ತೆಗೆಯದೆ ತಿನ್ನಲು ಆಗುವುದಿಲ್ಲ.", a: "ಕಿತ್ತಳೆ" },
+  { q: "ನಾನು ಬಿದ್ದರೆ ಮನೆ ತುಂಬಾ ಗಲಾಟೆ.", a: "ವಿದ್ಯುತ್ ಫ್ಯೂಸ್" },
+  { q: "ನನ್ನ ಹೊಟ್ಟೆಯಲ್ಲಿ ನೂರು ಮಕ್ಕಳು.", a: "ದಾಳಿಂಬೆ" },
+  { q: "ನನ್ನ ತಲೆ ಮಾತ್ರ ತಿನ್ನುತ್ತಾರೆ, ದೇಹ ಬಿಸಾಡುತ್ತಾರೆ.", a: "ಕ್ಯಾರೆಟ್ (ತಲೆ ಭಾಗ)" },
+  { q: "ನಾನು ಸತ್ತರೆ ಮಾತ್ರ ನಿಮಗೆ ಊಟ.", a: "ಕೋಳಿ" },
+  { q: "ನನ್ನನ್ನು ಒಡೆದರೆ ಎಲ್ಲರೂ ಕುಡಿಯುತ್ತಾರೆ.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ನಾನು ಮಲಗಿದ್ದರೆ ಯಾರೂ ಎಬ್ಬಿಸುವುದಿಲ್ಲ, ನಿಂತರೆ ಎಲ್ಲರೂ ನೋಡುತ್ತಾರೆ.", a: "ಮರ" },
+  { q: "ನನ್ನನ್ನು ಕತ್ತರಿಸಿದರೆ ನಿನಗೆ ಕಣ್ಣೀರು.", a: "ಈರುಳ್ಳಿ" },
+  { q: "ನನ್ನನ್ನು ಬಿಚ್ಚಿದಷ್ಟೂ ನಾನು ಕಡಿಮೆಯಾಗುತ್ತೇನೆ.", a: "ಈರುಳ್ಳಿ" },
+  { q: "ಬಿಸಿಯಾದಾಗ ಮಾತ್ರ ನನ್ನ ಬೆಲೆ.", a: "ಚಹಾ" },
+  { q: "ತಿಂದರೆ ನಾಲಿಗೆ ಸುಡುತ್ತದೆ, ನೋಡಲು ಸುಂದರ.", a: "ಮೆಣಸಿನಕಾಯಿ" },
+  { q: "ನನ್ನನ್ನು ಬಗ್ಗಿಸಿದರೆ ಕೆಲಸ, ನೇರ ಮಾಡಿದರೆ ವ್ಯರ್ಥ.", a: "ಬಿಲ್ಲು" },
+  { q: "ಎಲ್ಲರೂ ನನ್ನನ್ನು ಒರೆಯುತ್ತಾರೆ, ಆದರೂ ನಾನು ಕಪ್ಪಾಗಿಯೇ ಇರುತ್ತೇನೆ.", a: "ಕಾವಲಿ" },
+  { q: "ಕಾಲು ಇಲ್ಲ, ಆದರೂ ಹತ್ತಿ ಮೇಲಕ್ಕೆ ಹೋಗುತ್ತೇನೆ.", a: "ಹೊಗೆ" },
+  { q: "ಎಲ್ಲರೂ ನನ್ನನ್ನು ಹೊಡೆಯುತ್ತಾರೆ, ನಾನು ಮಾತ್ರ ಶಬ್ದ ಮಾಡುತ್ತೇನೆ.", a: "ಡೋಲು" },
+  { q: "ತಲೆ ಇದೆ, ಬಾಲ ಇದೆ, ಮಧ್ಯದಲ್ಲಿ ದೇಹವೇ ಇಲ್ಲ.", a: "ನಾಣ್ಯ" },
+  { q: "ಹುಟ್ಟಿದಾಗ ನಾಲ್ಕು ಕಾಲು, ಸಾಯುವಾಗ ಎರಡು ಕಾಲು.", a: "ಮಂಚ (ಮರದಿಂದ ಹುಟ್ಟಿ, ಮಂಚವಾಗುವುದು)" },
+  { q: "ಒಂದು ಮನೆಯೊಳಗೆ ಮೂವತ್ತೆರಡು ಸೈನಿಕರು.", a: "ಹಲ್ಲುಗಳು" },
+  { q: "ಬಿಳಿ ಮನೆಯಲ್ಲಿ ಕೆಂಪು ರಾಜ.", a: "ನಾಲಿಗೆ" },
+  { q: "ಹೊರಗೆ ಹಸಿರು, ಒಳಗೆ ಬಿಳಿ, ಮಧ್ಯೆ ಕಪ್ಪು ರಾಜ.", a: "ಸೀಬೆಹಣ್ಣು" },
+  { q: "ಎಷ್ಟೇ ಕುಡಿದರೂ ದಾಹ ತೀರದು.", a: "ನೆಲ" },
+  { q: "ಒಬ್ಬ ತಾಯಿ, ನೂರಾರು ಮಕ್ಕಳು; ಮಕ್ಕಳು ಹುಟ್ಟಿದ ತಕ್ಷಣ ತಾಯಿ ಸಾಯುತ್ತಾಳೆ.", a: "ಬಾಳೆ ಗಿಡ" },
+  { q: "ಒಬ್ಬ ಅಣ್ಣ ಬಂದರೆ ಸಾವಿರ ತಮ್ಮಂದಿರು ಓಡಿಹೋಗುತ್ತಾರೆ.", a: "ಸೂರ್ಯ ಮತ್ತು ನಕ್ಷತ್ರಗಳು" },
+  { q: "ನನ್ನನ್ನು ಹಿಡಿದರೆ ಬಿಡಬೇಕು, ಬಿಟ್ಟರೆ ಹಿಡಿಯಬೇಕು.", a: "ಉಸಿರು" },
+  { q: "ತಲೆ ಇಲ್ಲ, ಬಾಲ ಇಲ್ಲ, ಆದರೂ ಮಧ್ಯೆ ಗಂಟು.", a: "ಲಡ್ಡು" },
+  { q: "ನನ್ನನ್ನು ಕತ್ತರಿಸಿದರೆ ನಾನು ಅಳಿಸುತ್ತೇನೆ.", a: "ಈರುಳ್ಳಿ" },
+  { q: "ಒಳಗೆ ಬಿಳಿ, ಹೊರಗೆ ಕಪ್ಪು, ಮಧ್ಯೆ ಸಿಹಿ.", a: "ಕರಿಬೇವು ಬೀಜ (ಪ್ರಾದೇಶಿಕ ರೂಪಾಂತರ)" },
+  { q: "ಒಂದು ಮನೆಯಲ್ಲಿ ಎರಡು ಕಿಟಕಿ, ಹೊರಗೆ ನೋಡುತ್ತವೆ, ಒಳಗೆ ನೋಡಲಾರವು.", a: "ಕಣ್ಣುಗಳು" },
+  { q: "ಕಾಲಿಲ್ಲ, ಆದರೂ ಬೆಟ್ಟ ಹತ್ತುತ್ತೇನೆ.", a: "ಹೊಗೆ" },
+  { q: "ನನ್ನನ್ನು ಎಸೆದರೆ ಮೇಲಕ್ಕೆ ಹೋಗುತ್ತೇನೆ, ಹಿಡಿದರೆ ಕೆಳಗೆ ಬರುತ್ತೇನೆ.", a: "ಚೆಂಡು" },
+  { q: "ಒಂದು ಬಟ್ಟೆ, ಸಾವಿರ ಮಡಚು.", a: "ಎಲೆಕೋಸು" },
+  { q: "ಒಂದು ಕಾಯಿ, ನೂರು ಕೊಠಡಿ.", a: "ದಾಳಿಂಬೆ" },
+  { q: "ತಿಂದರೆ ಹುಟ್ಟುತ್ತೇನೆ, ಕುಡಿದರೆ ಸಾಯುತ್ತೇನೆ.", a: "ಬೆಂಕಿ" },
+  { q: "ಕಪ್ಪು ಕುದುರೆ, ಬಿಳಿ ದಾರಿ ಬಿಡುತ್ತಾ ಹೋಗುತ್ತದೆ.", a: "ಚಾಕ್" },
+  { q: "ನನ್ನನ್ನು ಎಷ್ಟೇ ಬಳಸಿದರೂ ನಾನು ಕಡಿಮೆಯಾಗುವುದಿಲ್ಲ.", a: "ಜ್ಞಾನ" },
+  { q: "ಒಂದು ಹಗ್ಗ, ಎರಡು ಹಾವುಗಳನ್ನು ಕಟ್ಟಿದೆ.", a: "ಚಪ್ಪಲಿ ಲೇಸ್" },
+  { q: "ಮನೆ ಇಲ್ಲ, ಬಾಗಿಲಿಲ್ಲ, ಆದರೂ ಎಲ್ಲರೂ ಒಳಗೆ ಹೋಗುತ್ತಾರೆ.", a: "ಶಾಲೆ (ಜ್ಞಾನ ಲೋಕ)" },
+  { q: "ಹಗಲು ಕಾಣುವುದಿಲ್ಲ, ರಾತ್ರಿ ಎಲ್ಲರ ಮನೆಗೆ ಬರುತ್ತೇನೆ.", a: "ಚಂದ್ರನ ಬೆಳಕು" },
+  { q: "ತಾಯಿ ಒಂದು, ಉಡುಪು ನೂರು.", a: "ಈರುಳ್ಳಿ" },
+  { q: "ನನ್ನನ್ನು ತಿಂದಷ್ಟು ನಾನು ದೊಡ್ಡವನಾಗುತ್ತೇನೆ.", a: "ಗುಂಡಿ (ಕೊಳ/ಹೊಂಡ)" },
+  { q: "ನನ್ನನ್ನು ಎಲ್ಲರೂ ಮಲಗಿಸಿ ತಾವೇ ಕುಳಿತುಕೊಳ್ಳುತ್ತಾರೆ.", a: "ಕುರ್ಚಿ" },
+  { q: "ನನ್ನನ್ನು ಎಷ್ಟು ಹೊಡೆದರೂ ನಾನು ಮಾತ್ರ ಹಾಡುತ್ತೇನೆ.", a: "ಡೋಲು" },
+  { q: "ನನ್ನ ಹೊಟ್ಟೆ ತುಂಬಿದರೆ ನಿಮ್ಮ ಹೊಟ್ಟೆ ಖಾಲಿ.", a: "ಕಸದ ಬುಟ್ಟಿ" },
+  { q: "ಒಬ್ಬ ಅಣ್ಣ ಯಾವಾಗಲೂ ಓಡುತ್ತಾನೆ, ತಮ್ಮ ಯಾವಾಗಲೂ ಹಿಂಬಾಲಿಸುತ್ತಾನೆ.", a: "ಸೈಕಲ್ ಚಕ್ರಗಳು" },
+  { q: "ಬೆಳಿಗ್ಗೆ ನಾಲ್ಕು ಕಾಲು, ಮಧ್ಯಾಹ್ನ ಎರಡು ಕಾಲು, ರಾತ್ರಿ ಮೂರು ಕಾಲು... ಇದು ಗೊತ್ತು. ಆದರೆ ಬೆಳಗ್ಗೆ ನಾಲ್ಕು ಚಕ್ರ, ಮಧ್ಯಾಹ್ನ ಎರಡು ಚಕ್ರ, ರಾತ್ರಿ ಒಂದೇ ಚಕ್ರ?", a: "ಮಕ್ಕಳ ಸೈಕಲ್, ಬೈಕ್, ತಳ್ಳುಗಾಡಿ" },
+  { q: "ಎಲ್ಲರ ಬಾಯಿಗೂ ಹೋಗುತ್ತೇನೆ, ಆದರೆ ಯಾರ ಹೊಟ್ಟೆಯೂ ಸೇರುವುದಿಲ್ಲ.", a: "ಟೂತ್ ಬ್ರಷ್" },
+  { q: "ನನ್ನನ್ನು ಕೊಂಡು ಬಂದವನು ಬಳಸುವುದಿಲ್ಲ, ಬಳಸುವವನು ಕೊಂಡು ಬರೋದಿಲ್ಲ.", a: "ಶವಪೆಟ್ಟಿಗೆ" },
+  { q: "ಎಲ್ಲರೂ ನನ್ನನ್ನು ತೆಗೆಯುತ್ತಾರೆ, ಯಾರೂ ಹಿಂದಿರುಗಿ ಇಡುವುದಿಲ್ಲ.", a: "ಫೋಟೋ" },
+  { q: "ನನ್ನನ್ನು ಹಿಡಿದರೆ ತಪ್ಪು, ಬಿಟ್ಟರೆ ಸರಿ.", a: "ಕೋಪ" },
+  { q: "ನಾನು ಮನೆಯಲ್ಲಿದ್ದರೆ ಎಲ್ಲರೂ ಹುಡುಕುತ್ತಾರೆ, ನಾನು ಕಾಣೆಯಾಗಿದ್ದರೆ ಎಲ್ಲರೂ ಬೈಯುತ್ತಾರೆ.", a: "ಟಿವಿ ರಿಮೋಟ್" },
+  { q: "ನನ್ನನ್ನು ಕತ್ತರಿಸಿದರೆ ಅಳಿಸುತ್ತೇನೆ, ಬೇಯಿಸಿದರೆ ನಗಿಸುತ್ತೇನೆ.", a: "ಈರುಳ್ಳಿ" },
+  { q: "ಮದುವೆ ಮನೆಗೆ ಕರೆಯುವುದಿಲ್ಲ, ಆದರೂ ಮೊದಲೇ ಹೋಗಿಬಿಡುತ್ತೇನೆ.", a: "ಸದ್ದು" },
+  { q: "ಮನೆಗೆ ಬಂದರೆ ಎಲ್ಲರೂ ಓಡಿಸುತ್ತಾರೆ, ಹೋದರೆ ಎಲ್ಲರೂ ಹುಡುಕುತ್ತಾರೆ.", a: "ವಿದ್ಯುತ್" },
+  { q: "ನನ್ನ ತಲೆ ಒಡೆದರೆ ಮಾತ್ರ ನಿಮ್ಮ ದಾಹ ತೀರಿಸುತ್ತದೆ.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ನನ್ನನ್ನು ಎಷ್ಟು ತೊಳೆದರೂ ನಾನು ಕರಗುತ್ತೇನೆ.", a: "ಸಾಬೂನು" },
+  { q: "ಯಾರೂ ನನ್ನನ್ನು ಊಟಕ್ಕೆ ಕರೆಯುವುದಿಲ್ಲ, ಆದರೂ ಎಲ್ಲರ ತಟ್ಟೆಯಲ್ಲೂ ಇರುತ್ತೇನೆ.", a: "ಉಪ್ಪು" },
+  { q: "ನನ್ನನ್ನು ತಿನ್ನುವ ಮೊದಲು ಎಲ್ಲರೂ ಹೊಡೆಯುತ್ತಾರೆ.", a: "ತೆಂಗಿನಕಾಯಿ" },
+  { q: "ನನ್ನನ್ನು ದಿನವೂ ನೋಡುತ್ತಾರೆ, ಆದರೆ ಯಾರೂ ನನ್ನ ಮುಖ ನೆನಪಿಟ್ಟುಕೊಳ್ಳುವುದಿಲ್ಲ.", a: "ಕನ್ನಡಿ" },
+  { q: "ನಾನು ಬಿದ್ದರೆ ಎಲ್ಲರೂ ಎದ್ದುಕೊಳ್ಳುತ್ತಾರೆ.", a: "ಅಲಾರಂ" },
+  { q: "ನನ್ನನ್ನು ಹಿಡಿಯಲು ಎಲ್ಲರೂ ಓಡುತ್ತಾರೆ, ಹಿಡಿದ ಮೇಲೆ ತಕ್ಷಣ ಬಿಡುತ್ತಾರೆ.", a: "ಬಸ್" },
+  { q: "ನಾನು ದಿನವೂ ಸಾಯುತ್ತೇನೆ, ದಿನವೂ ಹುಟ್ಟುತ್ತೇನೆ.", a: "ದಿನ" },
+  { q: "ನನ್ನನ್ನು ಮುಚ್ಚಿದರೆ ಎಲ್ಲರೂ ಸಂತೋಷ, ತೆರೆದರೆ ಎಲ್ಲರೂ ಓಡುತ್ತಾರೆ.", a: "ಛತ್ರಿ (ಮಳೆ ಬಂದಾಗ)" },
+  { q: "ನಾನು ಮಾತಾಡುವುದಿಲ್ಲ, ಆದರೆ ಮನೆಯ ಎಲ್ಲ ಜಗಳಕ್ಕೂ ಕಾರಣ.", a: "ಮೊಬೈಲ್ ಫೋನ್" },
+  { q: "ನನ್ನನ್ನು ಎಲ್ಲರೂ ಕದಿಯುತ್ತಾರೆ, ಆದರೂ ಪೊಲೀಸ್ ದೂರು ಕೊಡುವುದಿಲ್ಲ.", a: "ನಿದ್ರೆ" },
+  { q: "ನಾನು ಎಷ್ಟು ವಯಸ್ಸಾದರೂ ಪ್ರತಿವರ್ಷ ಹುಟ್ಟುಹಬ್ಬ ಆಚರಿಸುತ್ತೇನೆ.", a: "ಮನುಷ್ಯ" }
+];
+
+function pickRandomRiddle(excludeIdx) {
+  if (RIDDLES.length <= 1) return 0;
+  let i = Math.floor(Math.random() * RIDDLES.length);
+  while (i === excludeIdx) i = Math.floor(Math.random() * RIDDLES.length);
+  return i;
+}
+
+function RiddleScene({ onContinue }) {
+  const [idx, setIdx] = useState(() => pickRandomRiddle(-1));
+  const [revealed, setRevealed] = useState(false);
+
+  const another = () => {
+    chime(700);
+    setRevealed(false);
+    setIdx((i) => pickRandomRiddle(i));
+  };
+
+  const reveal = () => {
+    chime(900);
+    setRevealed(true);
+  };
+
+  const current = RIDDLES[idx];
+
+  return (
+    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden px-6 py-8" style={{ background: "radial-gradient(ellipse at 50% 20%, #1a2550 0%, #0d1436 45%, #070a1f 100%)" }}>
+      <Stars count={30} />
+      <div className="relative z-10 text-center mb-6" style={{ maxWidth: 400 }}>
+        <div style={{ fontSize: 24 }}>🧩</div>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", color: "#FFE9C2" }}>ಕನ್ನಡ ಒಗಟುಗಳು</h2>
+      </div>
+
+      <div
+        key={idx}
+        className="relative z-10 text-center px-6 py-8"
+        style={{
+          width: "100%",
+          maxWidth: 340,
+          minHeight: 190,
+          borderRadius: 14,
+          background: "rgba(255,253,247,0.06)",
+          border: "1px solid rgba(245,197,107,0.35)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          animation: "fadeInSoft 0.7s ease",
+        }}
+      >
+        <p style={{ fontFamily: "'Caveat', cursive", fontSize: "1.5rem", color: "#FFE9C2", lineHeight: 1.3 }}>{current.q}</p>
+
+        {revealed && (
+          <div
+            className="mt-5 pt-4"
+            style={{ borderTop: "1px dashed rgba(245,197,107,0.35)", width: "100%", animation: "fadeInSoft 0.6s ease" }}
+          >
+            <p style={{ fontFamily: "'Caveat', cursive", fontSize: "1.5rem", color: "#F5C56B" }}>{current.a}</p>
+          </div>
+        )}
+      </div>
+
+      {!revealed ? (
+        <button
+          onClick={reveal}
+          className="relative z-10 mt-7 px-6 py-2.5 rounded-full text-sm"
+          style={{ background: "rgba(245,197,107,0.15)", color: "#F5C56B", border: "1px solid rgba(245,197,107,0.4)", fontFamily: "'Quicksand', sans-serif", fontWeight: 700 }}
+        >
+          Reveal Answer 👀
+        </button>
+      ) : (
+        <div className="relative z-10 flex items-center gap-3 mt-7">
+          <button
+            onClick={another}
+            className="px-6 py-2.5 rounded-full text-sm"
+            style={{ background: "rgba(245,197,107,0.15)", color: "#F5C56B", border: "1px solid rgba(245,197,107,0.4)", fontFamily: "'Quicksand', sans-serif", fontWeight: 700 }}
+          >
+            🎲 Another Riddle
+          </button>
+          <button
+            onClick={onContinue}
+            className="px-6 py-2.5 rounded-full text-sm"
+            style={{ background: "linear-gradient(135deg,#F5C56B,#E0A94C)", color: "#2a1c05", fontFamily: "'Quicksand', sans-serif", fontWeight: 700 }}
+          >
+            Read The Poem →
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ================= POEM SCENE ================= */
+function FloatingHearts({ count = 16 }) {
+  const hearts = useRef(
+    Array.from({ length: count }, () => ({
+      left: Math.random() * 100,
+      size: 10 + Math.random() * 16,
+      delay: Math.random() * 6,
+      dur: 6 + Math.random() * 5,
+      opacity: 0.35 + Math.random() * 0.4,
+    }))
+  ).current;
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
+      {hearts.map((h, i) => (
+        <span
+          key={i}
+          style={{
+            position: "absolute",
+            left: `${h.left}%`,
+            bottom: -30,
+            fontSize: h.size,
+            opacity: h.opacity,
+            animation: `floatHeart ${h.dur}s ease-in ${h.delay}s infinite`,
+          }}
+        >
+          💗
+        </span>
+      ))}
+    </div>
+  );
+}
+
+// POEM_TITLE / POEM_LINES: replace with your real poem — one line per array entry, reveals gently line by line.
+const POEM_TITLE = "ಕವಿತೆ";
+const POEM_LINES = [
+  "ನೀನು...",
+  "ನನ್ನ ದೇವರು ನನಗೆ ಕೊಟ್ಟ",
+  "ಯಾವತ್ತೂ ರಿಟರ್ನ್ ಮಾಡಲಾಗದ ಉಡುಗೊರೆ.",
+  "ನೀನು ನಗುವಾಗ,",
+  "",
+  "ಹೂಗಳಿಗೂ ನಗಬೇಕು ಅನಿಸುತ್ತದೆ.",
+  "ನೀನು ಮಾತಾಡುವಾಗ,",
+  "ಗಾಳಿಗೂ ನಿಂತು ಕೇಳಬೇಕು ಅನಿಸುತ್ತದೆ.",
+  "ನೀನು ಬಂದರೆ,",
+  "",
+  "ಮನೆಗೂ ಜೀವ ಬಂದಂತಾಗುತ್ತದೆ.",
+  "ನೀನು ಹೋದರೆ,",
+  "ಸದ್ದು ತುಂಬಿದ ಜಾಗವೂ ಮೌನವಾಗುತ್ತದೆ.",
+  "ನೀನು ಸಿಟ್ಟಾದರೆ,",
+  "",
+  "ಮೋಡಗಳಿಗೂ ಗುಡುಗಲು ನಾಚಿಕೆ.",
+  "ನೀನು ನಕ್ಕರೆ,",
+  "ನನ್ನ ಚಿಂತೆಗಳೆಲ್ಲ ದಾರಿ ತಪ್ಪುತ್ತವೆ.",
+  "ನಿನ್ನ ಜೊತೆ ಕಳೆದ ಕ್ಷಣಗಳು,",
+  "",
+  "ಗಡಿಯಾರಕ್ಕೂ ಎಣಿಸಲಾಗದ ಕಥೆಗಳು.",
+  "ನಿನ್ನ ಜೊತೆಗಿನ ಜಗಳಗಳು,",
+  "ಮರುದಿನದ ನಗುವಿಗೆ ಕಾರಣಗಳು.",
+  "ನಮ್ಮ ಸ್ನೇಹ...",
+  "",
+  "ಮಳೆಯಲ್ಲಿ ಒದ್ದೆಯಾದ ಮಣ್ಣಿನ ಪರಿಮಳ,",
+  "ಬಿಸಿಲಿನಲ್ಲಿ ನೆರಳಾದ ಮರ,",
+  "ಕತ್ತಲಲ್ಲಿ ಹೊಳೆಯುವ ಪುಟ್ಟ ದೀಪ.",
+  "ಒಂಬತ್ತು ವರ್ಷಗಳು ಕಳೆದರೂ,",
+  "",
+  "ನೆನಪುಗಳಿಗೆ ಇನ್ನೂ ಹೊಸ ಬಣ್ಣ.",
+  "ಇನ್ನೂ ಎಷ್ಟೇ ವರ್ಷ ಕಳೆದರೂ...",
+  "ನಮ್ಮ ನಗುವಿಗೆ ವಯಸ್ಸಾಗಬಾರದು,",
+  "ನಮ್ಮ ಕೀಟಲೆಗಳಿಗೆ ಕೊನೆಯಿರಬಾರದು,",
+  "ನಮ್ಮ ಸ್ನೇಹಕ್ಕೆ ದೂರವೆಂಬ ಪದವೇ ಇರಬಾರದು.",
+  "ಏಕೆಂದರೆ...",
+  "",
+  "ಗೆಳತಿ ಅಂದರೆ ಒಂದು ಹೆಸರು ಅಲ್ಲ...",
+  "ನನ್ನ ಜೀವನದಲ್ಲಿ ಅದು 'ನೀನು.' 🤍",
+  "",
+  ""
+];
+
+function PoemScene({ onContinue }) {
+  const [idx, setIdx] = useState(0);
+  const isLast = idx === POEM_LINES.length - 1;
+  useEffect(() => {
+    if (isLast) return;
+    const t = setTimeout(() => setIdx((i) => i + 1), 2200);
+    return () => clearTimeout(t);
+  }, [idx, isLast]);
+
+  return (
+    <div
+      className="relative w-full h-full flex flex-col items-center px-6 py-10"
+      style={{
+        background: "radial-gradient(ellipse at 50% 15%, #ffdce9 0%, #ffb6d0 55%, #ff9bbe 100%)",
+        overflowY: "auto",
+        WebkitOverflowScrolling: "touch",
+      }}
+    >
+      <div className="fixed inset-0" style={{ zIndex: 0 }}>
+        <FloatingHearts />
+      </div>
+      <div className="relative z-10 text-center" style={{ maxWidth: 400 }}>
+        <div style={{ fontSize: 24 }}>💌</div>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", color: "#7A1E42", marginBottom: 18 }}>{POEM_TITLE}</h2>
+
+        <div>
+          {POEM_LINES.slice(0, idx + 1).map((line, i) => (
+            <p
+              key={i}
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: "1.35rem",
+                color: "#5C1834",
+                marginBottom: 8,
+                animation: "fadeInSoft 1.2s ease",
+              }}
+            >
+              {line}
+            </p>
+          ))}
+        </div>
+
+        {isLast && (
+          <button
+            onClick={onContinue}
+            className="mt-6 mb-10 px-7 py-3 rounded-full text-sm"
+            style={{ background: "linear-gradient(135deg,#E0567F,#C23764)", color: "#fff", fontFamily: "'Quicksand', sans-serif", fontWeight: 700, animation: "fadeInSoft 1.6s ease" }}
+          >
+            One Last Page →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ================= SCRAPBOOK INTRO SCENE ================= */
+function ScrapbookScene() {
+  const [idx, setIdx] = useState(0);
+  const isLast = idx === LETTER_LINES.length - 1;
+  useEffect(() => {
+    if (isLast) return;
+    const t = setTimeout(() => setIdx((i) => i + 1), 1900);
+    return () => clearTimeout(t);
+  }, [idx, isLast]);
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center p-6" style={{ background: "linear-gradient(180deg,#F6EEDC,#EEE2C8)" }}>
+      <div
+        className="relative"
+        style={{
+          width: "100%",
+          maxWidth: 420,
+          background: "#FFFDF7",
+          borderRadius: 4,
+          padding: "38px 30px",
+          boxShadow: "0 12px 40px rgba(90,70,40,0.25)",
+          animation: "fadeInSoft 1.2s ease",
+        }}
+      >
+        <Sparkles size={18} color="#E0A94C" style={{ position: "absolute", top: 14, right: 16 }} />
+        {LETTER_LINES.slice(0, idx + 1).map((line, i) => (
+          <p
+            key={i}
+            style={{
+              fontFamily: "'Caveat', cursive",
+              fontSize: i === 0 ? "1.5rem" : "1.3rem",
+              fontWeight: i === 0 ? 700 : 400,
+              color: "#3B2E1E",
+              marginBottom: 10,
+              animation: "fadeInSoft 1s ease",
+            }}
+          >
+            {line}
+          </p>
+        ))}
+        {isLast && (
+          <div className="mt-4 flex items-center gap-2" style={{ animation: "fadeInSoft 1.6s ease" }}>
+            <Heart size={16} color="#E08A8A" fill="#E08A8A" />
+            <p style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.8rem", color: "#8A7659" }}>
+              With all my love — {HER_NAME}. 🎂 
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ================= APP ROOT ================= */
+const SCENE_LIST = [
+  { id: "opening", label: "✨ Opening" },
+  { id: "cake", label: "🎂 Cake & Candles" },
+  { id: "loveletter", label: "💌 Love Letter" },
+  { id: "flipbook", label: "🖼️ Photo Flipbook" },
+  { id: "funfacts", label: "🃏 Fun Facts" },
+  { id: "riddles", label: "🧩 Kannada Riddles" },
+  { id: "poem", label: "📝 Poem" },
+  { id: "scrapbook", label: "💛 Final Letter" },
+];
+
+function NavMenu({ current, onNavigate }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Menu"
+        className="fixed"
+        style={{
+          top: 16,
+          left: 16,
+          zIndex: 100,
+          width: 38,
+          height: 38,
+          borderRadius: "50%",
+          background: "rgba(0,0,0,0.4)",
+          border: "1px solid rgba(245,197,107,0.4)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {open ? <XIcon size={18} color="#F5C56B" /> : <Menu size={18} color="#F5C56B" />}
+      </button>
+
+      {open && (
+        <div
+          className="fixed inset-0"
+          style={{ zIndex: 90, background: "rgba(4,6,20,0.92)", overflowY: "auto", padding: "80px 20px 40px" }}
+        >
+          <p style={{ fontFamily: "'Quicksand', sans-serif", fontSize: "0.7rem", color: "#8A93C9", letterSpacing: 1, textAlign: "center", marginBottom: 14 }}>
+            JUMP TO A PART
+          </p>
+          <div className="flex flex-col gap-2" style={{ maxWidth: 320, margin: "0 auto" }}>
+            {SCENE_LIST.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => {
+                  onNavigate(s.id);
+                  setOpen(false);
+                }}
+                className="px-4 py-3 text-left"
+                style={{
+                  borderRadius: 10,
+                  background: current === s.id ? "rgba(245,197,107,0.18)" : "rgba(255,255,255,0.04)",
+                  border: current === s.id ? "1px solid rgba(245,197,107,0.5)" : "1px solid rgba(255,255,255,0.08)",
+                  color: "#FFE9C2",
+                  fontFamily: "'Quicksand', sans-serif",
+                  fontSize: "0.9rem",
+                }}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+function MusicToggle() {
+  const [on, setOn] = useState(true);
+  useEffect(() => {
+    const start = () => {
+      if (on) startMelody();
+      document.removeEventListener("pointerdown", start);
+    };
+    document.addEventListener("pointerdown", start);
+    return () => document.removeEventListener("pointerdown", start);
+  }, []);
+  const toggle = () => {
+    setOn((v) => {
+      const next = !v;
+      if (next) startMelody();
+      else stopMelody();
+      return next;
+    });
+  };
+  return (
+    <button
+      onClick={toggle}
+      aria-label="Toggle music"
+      className="fixed"
+      style={{
+        top: 16,
+        right: 16,
+        zIndex: 100,
+        width: 38,
+        height: 38,
+        borderRadius: "50%",
+        background: "rgba(0,0,0,0.4)",
+        border: "1px solid rgba(245,197,107,0.4)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {on ? <Volume2 size={17} color="#F5C56B" /> : <VolumeX size={17} color="#F5C56B" />}
+    </button>
+  );
+}
+
+function VaniBirthdaySite() {
+  const [scene, setScene] = useState("opening");
+
+  return (
+    <div className="w-full" style={{ height: "100vh", minHeight: 640, fontFamily: "'Quicksand', sans-serif" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@400;600;700&family=Caveat:wght@400;700&display=swap');
+
+        @keyframes twinkle { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+        @keyframes fadeInSoft { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+        @keyframes popIn { 0% { opacity:0; transform: scale(0.85);} 60% { opacity:1; transform: scale(1.05);} 100% { transform: scale(1);} }
+        @keyframes floatFade { 0% { opacity:0; transform: translate(-50%,10px);} 15% { opacity:1; transform: translate(-50%,0);} 80% { opacity:1;} 100% { opacity:0; transform: translate(-50%,-60px);} }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(1) rotate(-2deg);} 100% { transform: translateX(-50%) scale(1.15) rotate(2deg);} }
+        @keyframes pulseGlow { 0%,100% { opacity:0.6;} 50% { opacity:1;} }
+        @keyframes blessingIn {
+          0% { opacity: 0; transform: translateX(-50%) translateY(14px) scale(0.85); filter: blur(4px); }
+          60% { opacity: 1; filter: blur(0); }
+          100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+        }
+        @keyframes confettiFall { to { transform: translateY(115vh) rotate(400deg); } }
+        @keyframes fireworkBurst {
+          0% { box-shadow: 0 0 0 0 currentColor; opacity:1; transform:scale(0.5);}
+          60% { opacity:1; }
+          100% { box-shadow: 0 0 0 60px transparent; opacity:0; transform:scale(1.6);}
+        }
+        @keyframes balloonRise { to { transform: translateY(-135vh); } }
+        @keyframes teddyBob { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-6px);} }
+        @keyframes orbit { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+        @keyframes flashOut { from { opacity: 1; } to { opacity: 0; } }
+        @keyframes starPop { 0% { transform: scale(0.2); opacity: 0; } 60% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(1); } }
+        @keyframes shootingStar {
+          0% { transform: translate(0,0); opacity: 0; }
+          5% { opacity: 1; }
+          25% { transform: translate(220px,120px); opacity: 0; }
+          100% { transform: translate(220px,120px); opacity: 0; }
+        }
+        @keyframes shakeNo { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+        @keyframes floatHeart {
+          0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(-115vh) translateX(18px) rotate(12deg); opacity: 0; }
+        }
+        @keyframes pageFlipNext { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(-100deg); } }
+        @keyframes pageFlipPrev { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(100deg); } }
+        @keyframes curlShadowNext { 0% { opacity: 0; } 35% { opacity: 1; } 100% { opacity: 0; } }
+        @keyframes curlShadowPrev { 0% { opacity: 0; } 35% { opacity: 1; } 100% { opacity: 0; } }
+      `}</style>
+
+      <NavMenu current={scene} onNavigate={setScene} />
+      <MusicToggle />
+
+      {scene === "opening" && (
+        <OpeningScene onSkip={() => setScene("gift")} onBegin={() => setScene("puzzle")} />
+      )}
+      {scene === "puzzle" && <LaunchPuzzleScene onContinue={() => setScene("cake")} />}
+      {scene === "cake" && <CakeScene onDone={() => setScene("transition1")} />}
+      {scene === "transition1" && <TransitionScene onContinue={() => setScene("gift")} />}
+      {scene === "gift" && <GiftScene onOpened={() => setScene("loveletter")} />}
+      {scene === "loveletter" && <LoveLetterScene onContinue={() => setScene("reveal")} />}
+      {scene === "reveal" && <RevealScene onContinue={() => setScene("flipbook")} />}
+      {scene === "flipbook" && <FlipbookScene onContinue={() => setScene("funfacts")} />}
+      {scene === "funfacts" && <FunFactsScene onContinue={() => setScene("riddles")} />}
+      {scene === "riddles" && <RiddleScene onContinue={() => setScene("poem")} />}
+      {scene === "poem" && <PoemScene onContinue={() => setScene("scrapbook")} />}
+      {scene === "scrapbook" && <ScrapbookScene />}
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<VaniBirthdaySite />);
+
+</script>
+</body>
+</html>
